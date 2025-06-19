@@ -48,34 +48,30 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ======================
-  // 3. Mobile Menu
+  // 3. Mobile Menu (Fixed Version)
   // ======================
   function setupMobileMenu() {
-    const menuToggle = document.querySelector('.menu-toggle') || document.querySelector('.mobile-menu-toggle');
-    const nav = document.querySelector("nav");
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
 
-    if (!menuToggle) {
-      const newToggle = document.createElement("div");
-      newToggle.className = "mobile-menu-toggle";
-      newToggle.innerHTML = '<i class="fas fa-bars"></i>';
-      document.querySelector("header .container").prepend(newToggle);
-      menuToggle = newToggle;
+    if (!menuToggle || !nav) {
+      console.error("Mobile menu elements not found!");
+      return;
     }
 
-    menuToggle.addEventListener("click", function () {
-      nav.classList.toggle("active");
+    menuToggle.addEventListener('click', function() {
+      nav.classList.toggle('active');
     });
 
-    // Close mobile menu when clicking on a link
-    document.querySelectorAll("nav ul li a").forEach((link) => {
-      link.addEventListener("click", function () {
-        nav.classList.remove("active");
+    document.querySelectorAll('nav ul li a').forEach(link => {
+      link.addEventListener('click', function() {
+        nav.classList.remove('active');
       });
     });
   }
 
   // ======================
-  // 4. Scroll Animations (Consolidated)
+  // 4. Scroll Animations
   // ======================
   function setupScrollAnimations() {
     const animateElements = [
@@ -88,7 +84,6 @@ document.addEventListener("DOMContentLoaded", function () {
     ].map(selector => document.querySelectorAll(selector))
      .flat();
 
-    // Set initial state for animation
     animateElements.forEach((element) => {
       if (element) {
         element.style.opacity = "0";
@@ -112,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     window.addEventListener("scroll", animateOnScroll);
-    animateOnScroll(); // Run once on page load
+    animateOnScroll();
   }
 
   // ======================
@@ -151,7 +146,6 @@ document.addEventListener("DOMContentLoaded", function () {
         slides.style.transform = `translateX(-${currentIndex * 100}%)`;
       }
 
-      // Navigation
       nextBtn?.addEventListener("click", () => {
         currentIndex = (currentIndex + 1) % totalSlides;
         updateSlider();
@@ -162,7 +156,6 @@ document.addEventListener("DOMContentLoaded", function () {
         updateSlider();
       });
 
-      // Touch support
       let touchStartX = 0;
       let touchEndX = 0;
 
@@ -180,12 +173,12 @@ document.addEventListener("DOMContentLoaded", function () {
         updateSlider();
       }, { passive: true });
 
-      updateSlider(); // Initialize
+      updateSlider();
     });
   }
 
   // ======================
-  // Initialize All Features
+  // Initialize Everything
   // ======================
   function init() {
     setupSmoothScrolling();
@@ -194,10 +187,80 @@ document.addEventListener("DOMContentLoaded", function () {
     setupScrollAnimations();
     setupImageHandling();
     setupProjectSliders();
-
-    console.log("All JavaScript features initialized");
   }
 
-  // Start everything
   init();
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  // Mobile Menu Functionality
+  function setupMobileMenu() {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+    
+    if (menuToggle && nav) {
+      // Toggle menu on click
+      menuToggle.addEventListener('click', function() {
+        nav.classList.toggle('active');
+        
+        // Prevent body scroll when menu is open
+        if (nav.classList.contains('active')) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = '';
+        }
+      });
+      
+      // Close menu when clicking on a link
+      document.querySelectorAll('nav ul li a').forEach(link => {
+        link.addEventListener('click', function() {
+          nav.classList.remove('active');
+          document.body.style.overflow = '';
+        });
+      });
+      
+      // Close menu when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
+          nav.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+    }
+  }
+
+  // Active Navigation Highlight
+  function setupActiveNavHighlight() {
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('nav ul li a');
+    
+    window.addEventListener('scroll', function() {
+      let current = '';
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        
+        if (window.scrollY >= sectionTop - 100) {
+          current = section.getAttribute('id');
+        }
+      });
+      
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').includes(current)) {
+          link.classList.add('active');
+        }
+      });
+    });
+  }
+
+  // Initialize all navigation-related functions
+  function initNavigation() {
+    setupMobileMenu();
+    setupActiveNavHighlight();
+  }
+
+  // Start initialization
+  initNavigation();
 });
