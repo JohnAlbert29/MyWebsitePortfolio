@@ -1138,24 +1138,143 @@ footer .container {
   left: 0;
 }
 
-/* Responsive Design */
+/* ============================================= */
+/* SKILLS SECTION MOBILE FIXES */
+/* ============================================= */
+
 @media (max-width: 768px) {
-  .timeline {
-    padding-left: 30px;
+  /* Center all skills section content */
+  .skills-services .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 15px;
   }
 
-  .timeline:before {
-    left: 10px;
+  /* Center skill cards */
+  .skill-category-card {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.5rem;
   }
 
-  .timeline-date {
-    left: -30px;
-    width: 100px;
+  /* Center card headers */
+  .skill-category-header {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 1rem;
   }
 
-  .skills-grid {
-    grid-template-columns: 1fr;
+  /* Center card content */
+  .skill-category-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 1.5rem;
+  }
+
+  /* Center images with proper sizing */
+  .skill-category-image {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    min-width: 0;
+    margin: 0 auto;
+    order: 1; /* Ensure image comes first on mobile */
+  }
+
+  .skill-category-image img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    object-fit: contain;
+  }
+
+  /* Center skill details */
+  .skill-category-details {
+    width: 100%;
+    text-align: center;
+    padding: 0;
+    order: 2; /* Ensure details come after image */
+  }
+
+  /* Center skill badges with proper wrapping */
+  .skill-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    margin: 1rem auto;
+    padding: 0;
+  }
+
+  .skill-badge {
+    display: inline-block;
+    margin: 0.25rem;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    flex-grow: 0;
+  }
+
+  /* Center services section */
+  .services-section {
+    text-align: center;
+  }
+
+  /* Center services grid */
+  .services-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .service-item {
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+  }
+
+  /* Fix any potential overflow issues */
+  .skill-category-card,
+  .skill-category-content,
+  .skill-category-details {
+    overflow: visible;
+  }
+
+  /* Remove any minimum widths that might interfere */
+  .skill-category-details {
+    min-width: 0;
   }
 }
 
+/* Additional fixes for very small screens */
+@media (max-width: 480px) {
+  .skill-category-card {
+    padding: 1rem;
+  }
+  
+  .skill-badge {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  
+  .skill-category-image {
+    height: 180px;
+  }
+}
+
+  
 
