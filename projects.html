@@ -106,6 +106,7 @@
         justify-content: space-between;
         align-items: center;
         padding: 0 20px;
+        position: relative;
       }
 
       header h1 {
@@ -114,7 +115,7 @@
         color: var(--white);
       }
 
-      /* Hamburger Menu */
+      /* Hamburger Menu - Updated */
       .menu-toggle {
         display: none;
         cursor: pointer;
@@ -127,7 +128,7 @@
         color: var(--white);
       }
 
-      /* Navigation - Updated for mobile */
+      /* Navigation - Updated to match academic.html */
       nav ul {
         display: flex;
         gap: 1.5rem;
@@ -355,7 +356,7 @@
         transition: all 0.6s ease-out;
       }
 
-      /* Media Queries for Mobile Responsiveness */
+      /* Media Queries for Mobile Responsiveness - Updated to match academic.html */
       @media (max-width: 768px) {
         header h1 {
           font-size: 1.3rem;
@@ -366,21 +367,22 @@
         }
 
         nav {
-          position: fixed;
-          top: 0;
-          right: -100%;
-          width: 80%;
-          max-width: 300px;
-          height: 100vh;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          max-height: 0;
           background: var(--primary-color);
           transition: all 0.3s ease;
           z-index: 100;
-          padding: 5rem 1.5rem 1.5rem;
-          box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+          overflow: hidden;
+          padding: 0 1.5rem;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         nav.active {
-          right: 0;
+          max-height: 500px;
+          padding: 1.5rem;
         }
 
         nav ul {
@@ -395,6 +397,10 @@
         }
 
         nav ul li a.active:after {
+          display: none;
+        }
+
+        .menu-toggle.active {
           display: none;
         }
 
@@ -691,12 +697,13 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // Hamburger menu toggle
+        // Hamburger menu toggle - Updated to match academic.html
         const menuToggle = document.querySelector('.menu-toggle');
         const nav = document.querySelector('nav');
         
         menuToggle.addEventListener('click', function() {
           nav.classList.toggle('active');
+          menuToggle.classList.toggle('active');
         });
 
         // Close menu when clicking on a link
@@ -704,6 +711,7 @@
         navLinks.forEach(link => {
           link.addEventListener('click', function() {
             nav.classList.remove('active');
+            menuToggle.classList.remove('active');
           });
         });
 

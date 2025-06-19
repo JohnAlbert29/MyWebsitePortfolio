@@ -48,24 +48,22 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ======================
-  // 3. Mobile Menu (Fixed Version)
+  // 3. Mobile Menu
   // ======================
   function setupMobileMenu() {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('nav');
+    const mobileMenuToggle = document.createElement("div");
+    mobileMenuToggle.className = "mobile-menu-toggle";
+    mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+    document.querySelector("header .container").prepend(mobileMenuToggle);
 
-    if (!menuToggle || !nav) {
-      console.error("Mobile menu elements not found!");
-      return;
-    }
-
-    menuToggle.addEventListener('click', function() {
-      nav.classList.toggle('active');
+    mobileMenuToggle.addEventListener("click", function () {
+      document.querySelector("nav").classList.toggle("active");
     });
 
-    document.querySelectorAll('nav ul li a').forEach(link => {
-      link.addEventListener('click', function() {
-        nav.classList.remove('active');
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll("nav ul li a").forEach((link) => {
+      link.addEventListener("click", function () {
+        document.querySelector("nav").classList.remove("active");
       });
     });
   }
@@ -74,58 +72,51 @@ document.addEventListener("DOMContentLoaded", function () {
   // 4. Scroll Animations
   // ======================
   function setupScrollAnimations() {
-    const animateElements = [
-      ".education-item",
-      ".project-item",
-      ".service-item",
-      ".timeline-item",
-      ".animate-in",
-      ".experience-section .animate-in"
-    ].map(selector => document.querySelectorAll(selector))
-     .flat();
-
-    animateElements.forEach((element) => {
-      if (element) {
-        element.style.opacity = "0";
-        element.style.transform = "translateY(30px)";
-        element.style.transition = "all 0.6s ease";
-      }
-    });
-
     const animateOnScroll = function () {
-      animateElements.forEach((element) => {
-        if (element) {
-          const elementPosition = element.getBoundingClientRect().top;
-          const windowHeight = window.innerHeight;
+      const elements = document.querySelectorAll(
+        ".education-item, .project-item, .service-item, .timeline-item"
+      );
 
-          if (elementPosition < windowHeight - 100) {
-            element.style.opacity = "1";
-            element.style.transform = "translateY(0)";
-          }
+      elements.forEach((element) => {
+        const elementPosition = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+
+        if (elementPosition < windowHeight - 100) {
+          element.style.opacity = "1";
+          element.style.transform = "translateY(0)";
         }
       });
     };
 
+    // Set initial state for animation
+    const elementsToAnimate = document.querySelectorAll(
+      ".education-item, .project-item, .service-item, .timeline-item"
+    );
+    elementsToAnimate.forEach((element) => {
+      element.style.opacity = "0";
+      element.style.transform = "translateY(30px)";
+      element.style.transition = "all 0.6s ease";
+    });
+
     window.addEventListener("scroll", animateOnScroll);
-    animateOnScroll();
+    animateOnScroll(); // Run once on page load
   }
 
   // ======================
   // 5. Image Handling
   // ======================
   function setupImageHandling() {
-    document.querySelectorAll(".edu-image img").forEach((img) => {
-      const handleImageLoad = function () {
+    const eduImages = document.querySelectorAll(".edu-image img");
+    eduImages.forEach((img) => {
+      img.onload = function () {
         const container = this.closest(".edu-image");
         if (this.naturalHeight > this.naturalWidth) {
-          container?.classList.add("portrait");
+          container.classList.add("portrait");
         } else {
-          container?.classList.remove("portrait");
+          container.classList.remove("portrait");
         }
       };
-
-      img.onload = handleImageLoad;
-      if (img.complete) handleImageLoad.call(img);
+      if (img.complete) img.onload();
     });
   }
 
@@ -133,7 +124,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // 6. Project Sliders
   // ======================
   function setupProjectSliders() {
-    document.querySelectorAll(".project-slider").forEach((slider) => {
+    const sliders = document.querySelectorAll(".project-slider");
+
+    sliders.forEach((slider) => {
       const slides = slider.querySelector(".slides");
       const slideItems = slider.querySelectorAll(".slide");
       const prevBtn = slider.querySelector(".prev");
@@ -142,43 +135,61 @@ document.addEventListener("DOMContentLoaded", function () {
       let currentIndex = 0;
       const totalSlides = slideItems.length;
 
-      function updateSlider() {
-        slides.style.transform = `translateX(-${currentIndex * 100}%)`;
-      }
+      // Set initial position
+      updateSlider();
 
-      nextBtn?.addEventListener("click", () => {
+      // Next button click
+      nextBtn.addEventListener("click", () => {
         currentIndex = (currentIndex + 1) % totalSlides;
         updateSlider();
       });
 
-      prevBtn?.addEventListener("click", () => {
+      // Previous button click
+      prevBtn.addEventListener("click", () => {
         currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
         updateSlider();
       });
 
+      function updateSlider() {
+        slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+      }
+
+      // Optional: Touch support for mobile
       let touchStartX = 0;
       let touchEndX = 0;
 
-      slides?.addEventListener("touchstart", (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-      }, { passive: true });
+      slides.addEventListener(
+        "touchstart",
+        (e) => {
+          touchStartX = e.changedTouches[0].screenX;
+        },
+        { passive: true }
+      );
 
-      slides?.addEventListener("touchend", (e) => {
-        touchEndX = e.changedTouches[0].screenX;
+      slides.addEventListener(
+        "touchend",
+        (e) => {
+          touchEndX = e.changedTouches[0].screenX;
+          handleSwipe();
+        },
+        { passive: true }
+      );
+
+      function handleSwipe() {
         if (touchEndX < touchStartX - 50) {
+          // Swipe left - next
           currentIndex = (currentIndex + 1) % totalSlides;
         } else if (touchEndX > touchStartX + 50) {
+          // Swipe right - previous
           currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
         }
         updateSlider();
-      }, { passive: true });
-
-      updateSlider();
+      }
     });
   }
 
   // ======================
-  // Initialize Everything
+  // Initialize All Features
   // ======================
   function init() {
     setupSmoothScrolling();
@@ -187,80 +198,100 @@ document.addEventListener("DOMContentLoaded", function () {
     setupScrollAnimations();
     setupImageHandling();
     setupProjectSliders();
+
+    console.log("All JavaScript features initialized");
   }
 
+  // Start everything
   init();
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-  // Mobile Menu Functionality
-  function setupMobileMenu() {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('nav');
-    
-    if (menuToggle && nav) {
-      // Toggle menu on click
-      menuToggle.addEventListener('click', function() {
-        nav.classList.toggle('active');
-        
-        // Prevent body scroll when menu is open
-        if (nav.classList.contains('active')) {
-          document.body.style.overflow = 'hidden';
-        } else {
-          document.body.style.overflow = '';
-        }
-      });
-      
-      // Close menu when clicking on a link
-      document.querySelectorAll('nav ul li a').forEach(link => {
-        link.addEventListener('click', function() {
-          nav.classList.remove('active');
-          document.body.style.overflow = '';
-        });
-      });
-      
-      // Close menu when clicking outside
-      document.addEventListener('click', function(e) {
-        if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
-          nav.classList.remove('active');
-          document.body.style.overflow = '';
-        }
-      });
-    }
-  }
+// ======================
+// 7. Skills Animations
+// ======================
+function setupSkillsAnimations() {
+  // Animation on scroll for skills
+  const animateElements = document.querySelectorAll(".animate-in");
 
-  // Active Navigation Highlight
-  function setupActiveNavHighlight() {
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('nav ul li a');
-    
-    window.addEventListener('scroll', function() {
-      let current = '';
-      
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        
-        if (window.scrollY >= sectionTop - 100) {
-          current = section.getAttribute('id');
-        }
-      });
-      
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href').includes(current)) {
-          link.classList.add('active');
-        }
-      });
+  // Set initial state for animation
+  animateElements.forEach((element) => {
+    element.style.opacity = "0";
+    element.style.transform = "translateY(30px)";
+    element.style.transition = "all 0.6s ease";
+  });
+
+  // Function to check if element is in viewport
+  const animateOnScroll = function () {
+    animateElements.forEach((element) => {
+      const elementPosition = element.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+
+      if (elementPosition < windowHeight - 100) {
+        element.style.opacity = "1";
+        element.style.transform = "translateY(0)";
+      }
     });
-  }
+  };
 
-  // Initialize all navigation-related functions
-  function initNavigation() {
-    setupMobileMenu();
-    setupActiveNavHighlight();
-  }
+  // Run on load and scroll
+  window.addEventListener("scroll", animateOnScroll);
+  animateOnScroll(); // Run once on page load
+}
 
-  // Start initialization
-  initNavigation();
-});
+// Update the init function to include skills animations
+function init() {
+  setupSmoothScrolling();
+  setupActiveNavHighlight();
+  setupMobileMenu();
+  setupScrollAnimations();
+  setupImageHandling();
+  setupProjectSliders();
+  setupSkillsAnimations();
+
+  console.log("All JavaScript features initialized");
+}
+
+// ======================
+// 8. Experience Animations
+// ======================
+function setupExperienceAnimations() {
+  const experienceElements = document.querySelectorAll(
+    ".experience-section .animate-in"
+  );
+
+  // Set initial state
+  experienceElements.forEach((element) => {
+    element.style.opacity = "0";
+    element.style.transform = "translateY(30px)";
+    element.style.transition = "all 0.6s ease";
+  });
+
+  const animateExperienceOnScroll = function () {
+    experienceElements.forEach((element) => {
+      const elementPosition = element.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+
+      if (elementPosition < windowHeight - 100) {
+        element.style.opacity = "1";
+        element.style.transform = "translateY(0)";
+      }
+    });
+  };
+
+  window.addEventListener("scroll", animateExperienceOnScroll);
+  animateExperienceOnScroll(); // Run once on page load
+}
+
+// Update init function
+function init() {
+  setupSmoothScrolling();
+  setupActiveNavHighlight();
+  setupMobileMenu();
+  setupScrollAnimations();
+  setupImageHandling();
+  setupProjectSliders();
+  setupSkillsAnimations();
+  setupExperienceAnimations();
+
+  console.log("All JavaScript features initialized");
+}
