@@ -295,3 +295,5 @@ function init() {
 
   console.log("All JavaScript features initialized");
 }
+
+

@@ -90,11 +90,11 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       }
 
-      /* Header - COMPLETELY UNCHANGED */
+      /* Header - Updated for mobile */
       header {
         background: var(--primary-color);
         color: var(--white);
-        padding: 1.5rem 0;
+        padding: 1rem 0;
         position: sticky;
         top: 0;
         z-index: 100;
@@ -109,12 +109,25 @@
       }
 
       header h1 {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
         margin: 0;
         color: var(--white);
       }
 
-      /* Navigation - COMPLETELY UNCHANGED */
+      /* Hamburger Menu */
+      .menu-toggle {
+        display: none;
+        cursor: pointer;
+        padding: 10px;
+        z-index: 101;
+      }
+
+      .menu-toggle i {
+        font-size: 1.5rem;
+        color: var(--white);
+      }
+
+      /* Navigation - Updated for mobile */
       nav ul {
         display: flex;
         gap: 1.5rem;
@@ -148,15 +161,15 @@
 
       /* Project Section Enhancements */
       .projects-section {
-        padding: 4rem 0;
+        padding: 2rem 0;
       }
 
       .project-item {
         background: var(--white);
         border-radius: 12px;
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-        padding: 2.5rem;
-        margin-bottom: 3rem;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
         transition: transform 0.3s ease;
       }
 
@@ -168,7 +181,8 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
       }
 
       .project-type {
@@ -178,12 +192,13 @@
         border-radius: 20px;
         font-weight: 600;
         font-size: 0.9rem;
+        margin-top: 0.5rem;
       }
 
       .project-description {
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
         color: var(--text-color);
-        font-size: 1.1rem;
+        font-size: 1rem;
       }
 
       .project-tech {
@@ -204,17 +219,17 @@
       /* Enhanced Slider */
       .project-slider {
         position: relative;
-        max-width: 900px;
-        margin: 2rem auto;
+        max-width: 100%;
+        margin: 1.5rem auto;
         overflow: hidden;
-        border-radius: 12px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       }
 
       .slides {
         display: flex;
         transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        height: 500px;
+        height: 300px;
       }
 
       .slide {
@@ -227,16 +242,16 @@
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        background: yellow(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.2);
         backdrop-filter: blur(5px);
         color: var(--white);
         border: none;
-        width: 50px;
-        height: 50px;
+        width: 40px;
+        height: 40px;
         border-radius: 50%;
         cursor: pointer;
         z-index: 10;
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -245,22 +260,22 @@
       }
 
       .slider-btn:hover {
-        background: blue;
+        background: var(--primary-color);
         opacity: 1;
         transform: translateY(-50%) scale(1.1);
       }
 
       .slider-btn.prev {
-        left: 2rem;
+        left: 1rem;
       }
 
       .slider-btn.next {
-        right: 2rem;
+        right: 1rem;
       }
 
       .slider-dots {
         position: absolute;
-        bottom: 1.5rem;
+        bottom: 1rem;
         left: 50%;
         transform: translateX(-50%);
         display: flex;
@@ -269,10 +284,10 @@
       }
 
       .slider-dot {
-        width: 12px;
-        height: 12px;
+        width: 10px;
+        height: 10px;
         border-radius: 50%;
-        background: blue;
+        background: var(--primary-color);
         cursor: pointer;
         transition: all 0.3s ease;
       }
@@ -286,19 +301,19 @@
       .thesis-info {
         background: var(--light-color);
         border-left: 4px solid var(--secondary-color);
-        padding: 1.5rem;
-        margin: 2rem 0;
+        padding: 1rem;
+        margin: 1.5rem 0;
         border-radius: 0 8px 8px 0;
       }
 
       .thesis-info h4 {
         color: var(--primary-color);
-        margin-bottom: 1rem;
+        margin-bottom: 0.8rem;
       }
 
       /* Business List - Modified to remove bullets */
       .business-list {
-        margin: 1.5rem 0;
+        margin: 1rem 0;
       }
       .business-item {
         display: flex;
@@ -320,13 +335,13 @@
         text-align: center;
       }
 
-      /* Footer - COMPLETELY UNCHANGED */
+      /* Footer */
       footer {
         background: var(--primary-color);
         color: var(--white);
         text-align: center;
-        padding: 2rem 0;
-        margin-top: 3rem;
+        padding: 1.5rem 0;
+        margin-top: 2rem;
       }
 
       footer .container {
@@ -339,17 +354,114 @@
         transform: translateY(20px);
         transition: all 0.6s ease-out;
       }
+
+      /* Media Queries for Mobile Responsiveness */
+      @media (max-width: 768px) {
+        header h1 {
+          font-size: 1.3rem;
+        }
+
+        .menu-toggle {
+          display: block;
+        }
+
+        nav {
+          position: fixed;
+          top: 0;
+          right: -100%;
+          width: 80%;
+          max-width: 300px;
+          height: 100vh;
+          background: var(--primary-color);
+          transition: all 0.3s ease;
+          z-index: 100;
+          padding: 5rem 1.5rem 1.5rem;
+          box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        nav.active {
+          right: 0;
+        }
+
+        nav ul {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        nav ul li a {
+          padding: 0.8rem;
+          display: block;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav ul li a.active:after {
+          display: none;
+        }
+
+        .project-slider {
+          height: 250px;
+        }
+
+        .slides {
+          height: 250px;
+        }
+
+        .slider-btn {
+          width: 35px;
+          height: 35px;
+          font-size: 1rem;
+        }
+
+        .project-item {
+          padding: 1.2rem;
+        }
+
+        .project-header h2 {
+          font-size: 1.3rem;
+        }
+
+        .project-header h3 {
+          font-size: 1.1rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .project-slider {
+          height: 200px;
+        }
+
+        .slides {
+          height: 200px;
+        }
+
+        .project-tech span {
+          padding: 0.4rem 0.8rem;
+          font-size: 0.8rem;
+        }
+
+        .business-item {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .business-item i {
+          margin-bottom: 0.3rem;
+        }
+      }
     </style>
   </head>
   <body>
      <header>
         <div class="container">
             <h1>Albert R. Web Portfolio</h1>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
             <nav>
                 <ul>
                     <li><a href="personal-info.html">Personal Info</a></li>
                     <li><a href="academic.html">Academic Background</a></li>
-                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="projects.html" class="active">Projects</a></li>
                     <li><a href="skills.html">Skills & Services</a></li>
                     <li><a href="work-experience.html">Work Experience</a></li>
                 </ul>
@@ -360,7 +472,7 @@
     <section id="projects" class="projects-section">
       <div class="container">
         <h1 class="animate-in">My Projects</h1>
-        <p class="animate-in" style="max-width: 800px; margin-bottom: 3rem">
+        <p class="animate-in" style="max-width: 800px; margin-bottom: 2rem">
           Here are some of my notable projects showcasing my skills in web
           development, problem-solving, and innovative thinking.
         </p>
@@ -579,6 +691,23 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
+        // Hamburger menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav');
+        
+        menuToggle.addEventListener('click', function() {
+          nav.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        const navLinks = document.querySelectorAll('nav ul li a');
+        navLinks.forEach(link => {
+          link.addEventListener('click', function() {
+            nav.classList.remove('active');
+          });
+        });
+
+        // Slider functionality
         const sliders = document.querySelectorAll(".project-slider");
 
         sliders.forEach((slider, sliderIndex) => {
