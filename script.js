@@ -188,19 +188,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // ======================
-  // Initialize All Features
-  // ======================
-  function init() {
-    setupSmoothScrolling();
-    setupActiveNavHighlight();
-    setupMobileMenu();
-    setupScrollAnimations();
-    setupImageHandling();
-    setupProjectSliders();
 
-    console.log("All JavaScript features initialized");
-  }
 
   // Start everything
   init();
@@ -238,18 +226,6 @@ function setupSkillsAnimations() {
   animateOnScroll(); // Run once on page load
 }
 
-// Update the init function to include skills animations
-function init() {
-  setupSmoothScrolling();
-  setupActiveNavHighlight();
-  setupMobileMenu();
-  setupScrollAnimations();
-  setupImageHandling();
-  setupProjectSliders();
-  setupSkillsAnimations();
-
-  console.log("All JavaScript features initialized");
-}
 
 // ======================
 // 8. Experience Animations
@@ -282,16 +258,28 @@ function setupExperienceAnimations() {
   animateExperienceOnScroll(); // Run once on page load
 }
 
-// Update init function
-function init() {
-  setupSmoothScrolling();
-  setupActiveNavHighlight();
-  setupMobileMenu();
-  setupScrollAnimations();
-  setupImageHandling();
-  setupProjectSliders();
-  setupSkillsAnimations();
-  setupExperienceAnimations();
 
-  console.log("All JavaScript features initialized");
+// Add this to your existing JavaScript
+function setupCVDownload() {
+    const downloadBtn = document.querySelector('.download-btn');
+    if (downloadBtn) {
+        downloadBtn.addEventListener('click', function() {
+            // You could add analytics or a confirmation here
+            console.log('CV download initiated');
+        });
+    }
+}
+
+// Add setupCVDownload to your init function
+function init() {
+    setupSmoothScrolling();
+    setupActiveNavHighlight();
+    setupMobileMenu();
+    setupScrollAnimations();
+    setupImageHandling();
+    setupProjectSliders();
+    setupSkillsAnimations();
+    setupExperienceAnimations();
+    setupCVDownload(); // Add this line
+    console.log("All JavaScript features initialized");
 }
