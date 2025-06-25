@@ -113,11 +113,11 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="personal-info.html">Personal Info</a></li>
+                    <li><a href="personal-info.html">Information</a></li>
                     <li><a href="academic.html">Academic Background</a></li>
                     <li><a href="projects.html">Projects</a></li>
-                    <li><a href="skills.html">Skills & Services</a></li>
-                    <li><a href="work-experience.html">Work Experience</a></li>
+                    <li><a href="skills.html" >Skills</a></li>
+                    <li><a href="work-experience.html">Experience</a></li>
                     <li><a href="certificates.html" class="active">Certificates</a></li>
                 </ul>
             </nav>
@@ -242,6 +242,27 @@
 
     <script src="js/script.js"></script>
      <script>
+         // Modal functionality
+        function openModal(imageSrc) {
+            const modal = document.getElementById('certificateModal');
+            const modalImg = document.getElementById('modalCertificateImage');
+            modalImg.src = imageSrc;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('certificateModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside the image
+        document.getElementById('certificateModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
       // Hamburger menu toggle script (copied from projects.html)
       document.addEventListener("DOMContentLoaded", function () {
         const menuToggle = document.querySelector('.menu-toggle');
