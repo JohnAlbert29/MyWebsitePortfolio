@@ -219,69 +219,9 @@ footer {
   }
 }
 
-/* ============================================= */
-/* RESPONSIVE DESIGN */
-/* ============================================= */
 
-@media (max-width: 768px) {
-  header .container {
-    flex-direction: column;
-    padding: 1rem;
-  }
-
-  header h1 {
-    margin-bottom: 1rem;
-  }
-
-  nav ul {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .hero {
-    padding: 5rem 0;
-  }
-
-  .hero h2 {
-    font-size: 2rem;
-  }
-
-  .profile-section,
-  .basic-info {
-    padding: 1.5rem;
-  }
-
-  .info-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .education-item {
-    max-width: 100%;
-  }
-
-  .edu-details {
-    padding: 1.5rem;
-  }
-
-  .slides {
-    height: 250px;
-  }
-
-  .project-item {
-    padding: 20px;
-  }
-
-  .project-item h3 {
-    font-size: 1.5rem;
-  }
-
-  .edu-image {
-    height: 180px;
-  }
-}
 
 @media (max-width: 480px) {  /* This is Where we edit when it comes to mobile*/
- 
   .btn {
   display: inline-block;
   background: var(--secondary-color);
@@ -362,6 +302,88 @@ footer {
         display: flex;
     }
 }
+
+/* Style for Hamburger menu */
+      header .container {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0 20px;
+          position: relative;
+      }
+
+      .menu-toggle {
+          display: none;
+          cursor: pointer;
+          padding: 10px;
+          z-index: 101;
+      }
+
+      .menu-toggle i {
+          font-size: 1.5rem;
+          color: var(--white, #ffffff);
+      }
+
+      nav ul {
+          display: flex;
+          gap: 1.5rem;
+      }
+
+      nav ul li a {
+          padding: 0.5rem 0;
+          position: relative;
+          transition: color 0.3s ease;
+          color: var(--white, #ffffff);
+          font-weight: 500;
+      }
+
+      nav ul li a:hover {
+          color: var(--secondary-color, #ffd700);
+      }
+
+      nav ul li a.active {
+          color: var(--secondary-color, #ffd700);
+      }
+
+      @media (max-width: 768px) {
+          .menu-toggle {
+              display: block;
+          }
+
+          nav {
+              position: absolute;
+              top: 100%;
+              left: 0;
+              width: 100%;
+              max-height: 0;
+              background: var(--primary-color, #1a237e);
+              transition: all 0.3s ease;
+              z-index: 100;
+              overflow: hidden;
+              padding: 0 1.5rem;
+              box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+          }
+
+          nav.active {
+              max-height: 500px;
+              padding: 1.5rem;
+          }
+
+          nav ul {
+              flex-direction: column;
+              gap: 1rem;
+          }
+
+          nav ul li a {
+              padding: 0.8rem;
+              display: block;
+              border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          }
+
+          .menu-toggle.active {
+              display: none;
+          }
+      }
 
 
 
