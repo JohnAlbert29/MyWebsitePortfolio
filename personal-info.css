@@ -377,3 +377,83 @@ footer .container {
 .download-btn i {
     font-size: 1rem;
 }
+header .container {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0 20px;
+          position: relative;
+      }
+
+      .menu-toggle {
+          display: none;
+          cursor: pointer;
+          padding: 10px;
+          z-index: 101;
+      }
+
+      .menu-toggle i {
+          font-size: 1.5rem;
+          color: #ffffff;
+      }
+
+      nav ul {
+          display: flex;
+          gap: 1.5rem;
+      }
+
+      nav ul li a {
+          padding: 0.5rem 0;
+          position: relative;
+          transition: color 0.3s ease;
+          color: #ffffff;
+          font-weight: 500;
+      }
+
+      nav ul li a:hover {
+          color: #ffd700;
+      }
+
+      nav ul li a.active {
+          color: #ffd700;
+      }
+
+      @media (max-width: 768px) {
+          .menu-toggle {
+              display: block;
+          }
+
+          nav {
+              position: absolute;
+              top: 100%;
+              left: 0;
+              width: 100%;
+              max-height: 0;
+              background: #1a237e;
+              transition: all 0.3s ease;
+              z-index: 100;
+              overflow: hidden;
+              padding: 0 1.5rem;
+              box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+          }
+
+          nav.active {
+              max-height: 500px;
+              padding: 1.5rem;
+          }
+
+          nav ul {
+              flex-direction: column;
+              gap: 1rem;
+          }
+
+          nav ul li a {
+              padding: 0.8rem;
+              display: block;
+              border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          }
+
+          .menu-toggle.active {
+              display: none;
+          }
+      }
