@@ -219,8 +219,6 @@ footer {
   }
 }
 
-
-
 @media (max-width: 480px) {  /* This is Where we edit when it comes to mobile*/
   .btn {
   display: inline-block;
