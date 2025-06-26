@@ -251,6 +251,18 @@ footer .container {
 }
 
 @media (max-width: 480px) {
+  .btn {
+  display: inline-block;
+  background: var(--secondary-color);
+  color: var(--dark-color);
+  padding: 4px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-align: center;
+}
   .hero h2 {
     font-size: 1.8rem;
   }
