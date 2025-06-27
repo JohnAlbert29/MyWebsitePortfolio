@@ -1,7 +1,8 @@
 /* ============================================= */
-/* 1. GLOBAL VARIABLES & BASE STYLES */
+/* GLOBAL STYLES */
 /* ============================================= */
 
+/* Color Scheme */
 :root {
   --primary-color: #1a237e; /* Deep Blue */
   --secondary-color: Gold; /* Gold */
@@ -12,6 +13,7 @@
   --white: #ffffff;
 }
 
+/* Base Styles */
 * {
   margin: 0;
   padding: 0;
@@ -33,20 +35,15 @@ body {
   padding: 20px;
 }
 
-/* ============================================= */
-/* 2. TYPOGRAPHY & TEXT ELEMENTS */
-/* ============================================= */
-
-h1, h2, h3, h4 {
+/* Typography */
+h1,
+h2,
+h3,
+h4 {
   margin-bottom: 1rem;
   font-weight: 600;
   color: var(--primary-color);
 }
-
-h1 { font-size: 2.25rem; }
-h2 { font-size: 1.8rem; }
-h3 { font-size: 1.5rem; }
-h4 { font-size: 1.2rem; }
 
 p {
   margin-bottom: 1rem;
@@ -61,10 +58,7 @@ a {
   color: inherit;
 }
 
-/* ============================================= */
-/* 3. BUTTONS & INTERACTIVE ELEMENTS */
-/* ============================================= */
-
+/* Buttons */
 .btn {
   display: inline-block;
   background: var(--secondary-color);
@@ -85,9 +79,10 @@ a {
 }
 
 /* ============================================= */
-/* 4. HEADER & NAVIGATION */
+/* LAYOUT COMPONENTS */
 /* ============================================= */
 
+/* Header */
 header {
   background: var(--primary-color);
   color: var(--white);
@@ -103,7 +98,6 @@ header .container {
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  position: relative;
 }
 
 header h1 {
@@ -144,23 +138,7 @@ nav ul li a.active:after {
   background: var(--secondary-color);
 }
 
-/* Hamburger Menu */
-.menu-toggle {
-  display: none;
-  cursor: pointer;
-  padding: 10px;
-  z-index: 101;
-}
-
-.menu-toggle i {
-  font-size: 1.5rem;
-  color: var(--white);
-}
-
-/* ============================================= */
-/* 5. HERO SECTION */
-/* ============================================= */
-
+/* Hero Section */
 .hero {
   background: linear-gradient(rgba(26, 35, 126, 0.8), rgba(26, 35, 126, 0.9)),
     url("https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
@@ -191,219 +169,7 @@ nav ul li a.active:after {
   color: var(--white);
 }
 
-/* ============================================= */
-/* 6. CERTIFICATES SECTION */
-/* ============================================= */
-
-.certificates-section {
-  padding: 4rem 0;
-  background-color: var(--light-color);
-}
-
-.certificates-section h1 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: var(--primary-color);
-}
-
-.section-description {
-  text-align: center;
-  max-width: 700px;
-  margin: 0 auto 3rem;
-  color: var(--accent-color);
-}
-
-.certificates-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 3rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.certificate-item {
-  background: var(--white);
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.3s ease;
-}
-
-.certificate-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
-}
-
-.certificate-image {
-  position: relative;
-  width: 100%;
-  height: 300px;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f0f0f0;
-}
-
-.certificate-image.portrait {
-  height: 400px;
-}
-
-.certificate-image.landscape {
-  height: 300px;
-}
-
-.certificate-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  transition: transform 0.3s ease;
-}
-
-.certificate-image:hover img {
-  transform: scale(1.03);
-}
-
-.view-certificate-btn {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(26, 35, 126, 0.9);
-  color: var(--white);
-  border: none;
-  border-radius: 30px;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.3s ease;
-  opacity: 0;
-}
-
-.certificate-image:hover .view-certificate-btn {
-  opacity: 1;
-}
-
-.view-certificate-btn:hover {
-  background-color: var(--secondary-color);
-  color: var(--primary-color);
-}
-
-.certificate-details {
-  padding: 2rem;
-  flex: 1;
-}
-
-.certificate-details h3 {
-  color: var(--primary-color);
-  margin-bottom: 0.5rem;
-  font-size: 1.5rem;
-}
-
-.issuing-org, .date-earned {
-  color: var(--accent-color);
-  margin-bottom: 0.5rem;
-  font-size: 0.95rem;
-}
-
-.certificate-description {
-  margin: 1.5rem 0;
-  color: var(--text-color);
-  line-height: 1.6;
-}
-
-.skills-gained h4 {
-  color: var(--primary-color);
-  margin-bottom: 1rem;
-  font-size: 1.1rem;
-}
-
-.skills-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem;
-}
-
-.skills-badges span {
-  background: linear-gradient(145deg, var(--primary-color), #3949ab);
-  color: var(--white);
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  box-shadow: 0 4px 10px rgba(26, 35, 126, 0.25);
-  transition: all 0.3s ease;
-}
-
-.skills-badges span:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(26, 35, 126, 0.35);
-  background: linear-gradient(145deg, var(--secondary-color), gold);
-  color: var(--dark-color);
-}
-
-/* Certificate Modal Styles */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-}
-
-.modal-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.modal-content {
-  position: relative;
-  max-width: 90%;
-  max-height: 90%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content img {
-  max-width: 100%;
-  max-height: 90vh;
-  border: 5px solid var(--secondary-color);
-  border-radius: 8px;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
-}
-
-.close-modal {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  color: var(--white);
-  font-size: 2.5rem;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.close-modal:hover {
-  color: var(--secondary-color);
-}
-
-/* ============================================= */
-/* 7. FOOTER */
-/* ============================================= */
-
+/* Footer */
 footer {
   background: var(--primary-color);
   color: var(--white);
@@ -416,289 +182,383 @@ footer .container {
   padding: 0 20px;
 }
 
-/* ============================================= */
-/* 8. MOBILE NAVIGATION BUTTONS */
-/* ============================================= */
 
-.mobile-nav-buttons {
-  display: none;
-  justify-content: space-between;
-  margin: 2rem 0;
-  gap: 1rem;
-}
-
-.mobile-nav-btn {
-  padding: 0.8rem 1.2rem;
-  background-color: var(--primary-color);
-  color: var(--white);
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: 500;
-  text-decoration: none;
-  text-align: center;
-  flex: 1;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.mobile-nav-btn:hover {
-  background-color: var(--secondary-color);
-  color: var(--primary-color);
-}
-
-.mobile-nav-btn i {
-  font-size: 0.9rem;
-}
-
-.mobile-nav-btn[disabled] {
-  opacity: 0.5;
-  cursor: not-allowed;
-  background-color: var(--primary-color);
-  color: var(--white);
-}
 
 /* ============================================= */
-/* 9. MOBILE RESPONSIVENESS */
+/* CERTIFICATES SECTION STYLES */
 /* ============================================= */
 
-@media (max-width: 768px) {
-  /* General Mobile Styles */
-  body {
-    font-size: 15px;
-    line-height: 1.5;
-  }
+.certificates-section {
+    padding: 4rem 0;
+    background-color: var(--light-color);
+}
 
-  .container {
-    width: 95%;
-    padding: 10px;
-  }
+.certificates-section h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
 
-  h1 { 
-    font-size: 1.8rem;
-    line-height: 1.3;
-  }
-  h2 { 
-    font-size: 1.5rem;
-    margin-bottom: 0.8rem;
-  }
-  h3 { 
-    font-size: 1.3rem;
-    margin-bottom: 0.8rem;
-  }
-  h4 {
-    font-size: 1.1rem;
-  }
+.section-description {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 3rem;
+    color: var(--accent-color);
+}
 
-  /* Header Adjustments */
-  header {
-    padding: 1rem 0;
-  }
+.certificates-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
-  header h1 {
-    font-size: 1.5rem;
-  }
+.certificate-item {
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+}
 
-  /* Mobile Navigation */
-  .menu-toggle {
-    display: block;
-  }
+.certificate-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
 
-  nav {
+.certificate-image {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+}
+
+.certificate-image.portrait {
+    height: 400px;
+}
+
+.certificate-image.landscape {
+    height: 300px;
+}
+
+.certificate-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.certificate-image:hover img {
+    transform: scale(1.03);
+}
+
+.view-certificate-btn {
     position: absolute;
-    top: 100%;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(26, 35, 126, 0.9);
+    color: var(--white);
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+.certificate-image:hover .view-certificate-btn {
+    opacity: 1;
+}
+
+.view-certificate-btn:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+.certificate-details {
+    padding: 2rem;
+    flex: 1;
+}
+
+.certificate-details h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.issuing-org, .date-earned {
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.certificate-description {
+    margin: 1.5rem 0;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.skills-gained h4 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.skills-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.skills-badges span {
+    background: linear-gradient(145deg, var(--primary-color), #3949ab);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    box-shadow: 0 4px 10px rgba(26, 35, 126, 0.25);
+    transition: all 0.3s ease;
+}
+
+.skills-badges span:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(26, 35, 126, 0.35);
+    background: linear-gradient(145deg, var(--secondary-color), gold);
+    color: var(--dark-color);
+}
+
+/* Certificate Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
     left: 0;
     width: 100%;
-    max-height: 0;
-    background: var(--primary-color);
-    transition: all 0.3s ease;
-    z-index: 100;
-    overflow: hidden;
-    padding: 0 1.5rem;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  }
-
-  nav.active {
-    max-height: 500px;
-    padding: 1.5rem;
-  }
-
-  nav ul {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  nav ul li a {
-    padding: 0.8rem;
-    display: block;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .menu-toggle.active {
-    display: none;
-  }
-
-  /* Hero Section */
-  .hero {
-    padding: 5rem 0;
-  }
-
-  .hero h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-  }
-
-  .hero p {
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  /* Certificates Section */
-  .certificates-section {
-    padding: 3rem 0;
-  }
-
-  .section-description {
-    margin-bottom: 2rem;
-  }
-
-  .certificates-grid {
-    gap: 2rem;
-  }
-
-  .certificate-item {
-    flex-direction: column;
-  }
-  
-  .certificate-image {
-    height: 250px;
-  }
-  
-  .certificate-image.portrait {
-    height: 350px;
-  }
-  
-  .view-certificate-btn {
-    opacity: 1;
-    font-size: 0.9rem;
-    padding: 8px 15px;
-  }
-
-  .certificate-details {
-    padding: 1.5rem;
-  }
-
-  .certificate-details h3 {
-    font-size: 1.3rem;
-  }
-
-  .skills-badges {
-    gap: 0.6rem;
-  }
-
-  /* Modal Adjustments */
-  .modal-content img {
-    max-height: 80vh;
-  }
-
-  /* Mobile Navigation Buttons */
-  .mobile-nav-buttons {
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
     display: flex;
-    margin: 1.5rem 0;
-  }
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
 
-  .mobile-nav-btn {
-    padding: 0.7rem 1rem;
-    font-size: 0.9rem;
-  }
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content img {
+    max-width: 100%;
+    max-height: 90vh;
+    border: 5px solid var(--secondary-color);
+    border-radius: 8px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: var(--white);
+    font-size: 2.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+    color: var(--secondary-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .certificate-item {
+        flex-direction: column;
+    }
+    
+    .certificate-image {
+        height: 250px;
+    }
+    
+    .certificate-image.portrait {
+        height: 350px;
+    }
+    
+    .view-certificate-btn {
+        opacity: 1;
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
 }
 
 @media (max-width: 480px) {
-  /* Extra Small Devices */
-  body {
-    font-size: 14px;
-  }
+    .certificate-image {
+        height: 200px;
+    }
+    
+    .certificate-image.portrait {
+        height: 300px;
+    }
+    
+    .certificate-details {
+        padding: 1.5rem;
+    }
+    
+    .skills-badges span {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+    }
+}
 
-  .container {
-    width: 98%;
-    padding: 8px;
-  }
+/* Mobile Navigation Buttons */
+.mobile-nav-buttons {
+    display: none;
+    justify-content: space-between;
+    margin: 2rem 0;
+    gap: 1rem;
+}
 
-  h1 { 
-    font-size: 1.6rem;
-    margin-bottom: 0.8rem;
-  }
-  h2 { 
-    font-size: 1.3rem;
-  }
-  h3 { 
-    font-size: 1.1rem;
-  }
+.mobile-nav-btn {
+    padding: 0.8rem 1.2rem;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    text-decoration: none;
+    text-align: center;
+    flex: 1;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
 
-  /* Hero Section */
-  .hero {
-    padding: 4rem 0;
-  }
+.mobile-nav-btn:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
 
-  /* Certificates Section */
-  .certificate-image {
-    height: 200px;
-  }
-  
-  .certificate-image.portrait {
-    height: 300px;
-  }
-  
-  .certificate-details {
-    padding: 1.2rem;
-  }
-
-  .certificate-description {
-    margin: 1rem 0;
+.mobile-nav-btn i {
     font-size: 0.9rem;
-  }
-
-  .skills-badges span {
-    font-size: 0.8rem;
-    padding: 0.4rem 0.8rem;
-  }
-
-  /* Modal Adjustments */
-  .modal-content img {
-    max-height: 70vh;
-  }
-
-  .close-modal {
-    font-size: 2rem;
-    top: 10px;
-    right: 10px;
-  }
-
-  /* Footer */
-  footer {
-    padding: 1.5rem 0;
-  }
 }
 
-@media (max-width: 360px) {
-  /* Smallest Devices */
-  .certificate-image {
-    height: 180px;
-  }
-  
-  .certificate-image.portrait {
-    height: 280px;
-  }
-
-  .mobile-nav-buttons {
-    flex-direction: column;
-    gap: 0.8rem;
-  }
-
-  .mobile-nav-btn {
-    width: 100%;
-  }
+.mobile-nav-btn[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: var(--primary-color);
+    color: var(--white);
 }
+
+@media (max-width: 768px) {
+    .mobile-nav-buttons {
+        display: flex;
+    }
+}
+
+/* Style for Hamburger menu */
+      header .container {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0 20px;
+          position: relative;
+      }
+
+      .menu-toggle {
+          display: none;
+          cursor: pointer;
+          padding: 10px;
+          z-index: 101;
+      }
+
+      .menu-toggle i {
+          font-size: 1.5rem;
+          color: var(--white, #ffffff);
+      }
+
+      nav ul {
+          display: flex;
+          gap: 1.5rem;
+      }
+
+      nav ul li a {
+          padding: 0.5rem 0;
+          position: relative;
+          transition: color 0.3s ease;
+          color: var(--white, #ffffff);
+          font-weight: 500;
+      }
+
+      nav ul li a:hover {
+          color: var(--secondary-color, #ffd700);
+      }
+
+      nav ul li a.active {
+          color: var(--secondary-color, #ffd700);
+      }
+
+      @media (max-width: 768px) {
+          .menu-toggle {
+              display: block;
+          }
+
+          nav {
+              position: absolute;
+              top: 100%;
+              left: 0;
+              width: 100%;
+              max-height: 0;
+              background: var(--primary-color, #1a237e);
+              transition: all 0.3s ease;
+              z-index: 100;
+              overflow: hidden;
+              padding: 0 1.5rem;
+              box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+          }
+
+          nav.active {
+              max-height: 500px;
+              padding: 1.5rem;
+          }
+
+          nav ul {
+              flex-direction: column;
+              gap: 1rem;
+          }
+
+          nav ul li a {
+              padding: 0.8rem;
+              display: block;
+              border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          }
+
+          .menu-toggle.active {
+              display: none;
+          }
+      }
