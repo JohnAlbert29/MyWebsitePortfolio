@@ -477,11 +477,27 @@ footer .container {
     padding: 10px;
   }
 
-  h1 { font-size: 1.8rem; }
-  h2 { font-size: 1.5rem; }
-  h3 { font-size: 1.3rem; }
+  h1 { 
+    font-size: 1.8rem;
+    line-height: 1.3;
+  }
+  h2 { 
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+  }
+  h3 { 
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+  }
+  h4 {
+    font-size: 1.1rem;
+  }
 
   /* Header Adjustments */
+  header {
+    padding: 1rem 0;
+  }
+
   header h1 {
     font-size: 1.5rem;
   }
@@ -532,13 +548,27 @@ footer .container {
 
   .hero h2 {
     font-size: 1.8rem;
+    margin-bottom: 1rem;
   }
 
   .hero p {
     font-size: 1rem;
+    margin-bottom: 1.5rem;
   }
 
   /* Certificates Section */
+  .certificates-section {
+    padding: 3rem 0;
+  }
+
+  .section-description {
+    margin-bottom: 2rem;
+  }
+
+  .certificates-grid {
+    gap: 2rem;
+  }
+
   .certificate-item {
     flex-direction: column;
   }
@@ -557,9 +587,32 @@ footer .container {
     padding: 8px 15px;
   }
 
+  .certificate-details {
+    padding: 1.5rem;
+  }
+
+  .certificate-details h3 {
+    font-size: 1.3rem;
+  }
+
+  .skills-badges {
+    gap: 0.6rem;
+  }
+
+  /* Modal Adjustments */
+  .modal-content img {
+    max-height: 80vh;
+  }
+
   /* Mobile Navigation Buttons */
   .mobile-nav-buttons {
     display: flex;
+    margin: 1.5rem 0;
+  }
+
+  .mobile-nav-btn {
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
   }
 }
 
@@ -569,6 +622,28 @@ footer .container {
     font-size: 14px;
   }
 
+  .container {
+    width: 98%;
+    padding: 8px;
+  }
+
+  h1 { 
+    font-size: 1.6rem;
+    margin-bottom: 0.8rem;
+  }
+  h2 { 
+    font-size: 1.3rem;
+  }
+  h3 { 
+    font-size: 1.1rem;
+  }
+
+  /* Hero Section */
+  .hero {
+    padding: 4rem 0;
+  }
+
+  /* Certificates Section */
   .certificate-image {
     height: 200px;
   }
@@ -578,11 +653,52 @@ footer .container {
   }
   
   .certificate-details {
-    padding: 1.5rem;
+    padding: 1.2rem;
   }
-  
+
+  .certificate-description {
+    margin: 1rem 0;
+    font-size: 0.9rem;
+  }
+
   .skills-badges span {
     font-size: 0.8rem;
     padding: 0.4rem 0.8rem;
+  }
+
+  /* Modal Adjustments */
+  .modal-content img {
+    max-height: 70vh;
+  }
+
+  .close-modal {
+    font-size: 2rem;
+    top: 10px;
+    right: 10px;
+  }
+
+  /* Footer */
+  footer {
+    padding: 1.5rem 0;
+  }
+}
+
+@media (max-width: 360px) {
+  /* Smallest Devices */
+  .certificate-image {
+    height: 180px;
+  }
+  
+  .certificate-image.portrait {
+    height: 280px;
+  }
+
+  .mobile-nav-buttons {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .mobile-nav-btn {
+    width: 100%;
   }
 }

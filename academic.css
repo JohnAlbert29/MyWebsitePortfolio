@@ -482,51 +482,7 @@ footer .container {
 
   /* Hero Section */
   .hero {
-    padding: 5rem 0;
-  }
 
-  .hero h2 {
-    font-size: 1.8rem;
-  }
-
-  .hero p {
-    font-size: 1rem;
-  }
-
-  /* Education Items */
-  .education-item {
-    margin-bottom: 2rem;
-  }
-
-  .edu-image {
-    height: 180px;
-  }
-
-  .edu-details {
-    padding: 1.5rem;
-  }
-
-  /* Honors Section */
-  .honors {
-    padding: 1rem;
-  }
-
-  .honors h3 {
-    font-size: 1.2rem;
-  }
-
-  .honors-badges,
-  .edu-tech {
-    flex-direction: column;
-  }
-
-  /* Mobile Navigation Buttons */
-  .mobile-nav-buttons {
-    display: flex;
-    margin: 1.5rem 0;
-  }
-
-  .mobile-nav-btn {
     padding: 0.7rem 1rem;
     font-size: 0.9rem;
   }
