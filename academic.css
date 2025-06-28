@@ -80,6 +80,42 @@ a {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* CV Download Buttons */
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: var(--primary-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.download-btn:hover {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.download-btn i {
+    font-size: 0.8rem;
+}
+
+.download-btn.view-btn {
+    background: var(--accent-color);
+}
+
+.download-btn.view-btn:hover {
+    background: #5d7988;
+    color: white;
+}
+
 /* ============================================= */
 /* 4. HEADER & NAVIGATION */
 /* ============================================= */
@@ -546,3 +582,81 @@ footer .container {
               display: none;
           }
       }
+/* ============================================= */
+/* RATING SLIP BUTTONS - PROFESSIONAL STYLE */
+/* ============================================= */
+.rating-slip-buttons {
+    display: flex;
+    gap: 9px;
+    margin-top: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.rating-slip-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-weight: 450;
+    font-size: 0.80rem;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    text-decoration: none;
+    border: 2px solid transparent;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    min-width: 140px;
+    text-align: center;
+}
+
+.rating-slip-button.view {
+    background-color: #1a237e;
+    color: gold;
+    border-color: #455a64;
+}
+
+.rating-slip-button.download {
+    background-color: #1a237e;
+    color: gold;
+    border-color: #455a64;
+}
+
+.rating-slip-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.rating-slip-button.view:hover {
+    background-color: #455a64;
+}
+
+.rating-slip-button.download:hover {
+    background-color: #455a64;
+}
+
+.rating-slip-button:active {
+    transform: translateY(1px);
+}
+
+.rating-slip-button i {
+    font-size: 0.9em;
+}
+
+/* Focus states for accessibility */
+.rating-slip-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .rating-slip-buttons {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .rating-slip-button {
+        width: 100%;
+    }
+}

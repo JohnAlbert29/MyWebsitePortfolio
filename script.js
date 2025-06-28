@@ -51,19 +51,20 @@ document.addEventListener("DOMContentLoaded", function () {
   // 3. Mobile Menu
   // ======================
   function setupMobileMenu() {
-    const mobileMenuToggle = document.createElement("div");
-    mobileMenuToggle.className = "mobile-menu-toggle";
-    mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-    document.querySelector("header .container").prepend(mobileMenuToggle);
-
-    mobileMenuToggle.addEventListener("click", function () {
-      document.querySelector("nav").classList.toggle("active");
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+    
+    menuToggle.addEventListener('click', function() {
+      nav.classList.toggle('active');
+      menuToggle.classList.toggle('active');
     });
 
-    // Close mobile menu when clicking on a link
-    document.querySelectorAll("nav ul li a").forEach((link) => {
-      link.addEventListener("click", function () {
-        document.querySelector("nav").classList.remove("active");
+    // Close menu when clicking on a link
+    const navLinks = document.querySelectorAll('nav ul li a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        nav.classList.remove('active');
+        menuToggle.classList.remove('active');
       });
     });
   }
@@ -188,89 +189,122 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // ======================
+  // 7. CV Download Handling
+  // ======================
+  function setupCVHandling() {
+    // View CV button
+    document.querySelectorAll('.download-btn.view-btn').forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const pdfUrl = this.getAttribute('href');
+        console.log('CV viewed:', pdfUrl);
+        window.open(pdfUrl, '_blank');
+      });
+    });
 
+    // Download CV button
+    document.querySelectorAll('.download-btn:not(.view-btn)').forEach(button => {
+      button.addEventListener('click', function(e) {
+        // Let default download behavior proceed
+        console.log('CV download initiated');
+      });
+    });
+  }
 
-  // Start everything
-  init();
-});
+  // ======================
+  // 8. Skills Animations
+  // ======================
+  function setupSkillsAnimations() {
+    const animateElements = document.querySelectorAll(".animate-in");
 
-// ======================
-// 7. Skills Animations
-// ======================
-function setupSkillsAnimations() {
-  // Animation on scroll for skills
-  const animateElements = document.querySelectorAll(".animate-in");
-
-  // Set initial state for animation
-  animateElements.forEach((element) => {
-    element.style.opacity = "0";
-    element.style.transform = "translateY(30px)";
-    element.style.transition = "all 0.6s ease";
-  });
-
-  // Function to check if element is in viewport
-  const animateOnScroll = function () {
+    // Set initial state for animation
     animateElements.forEach((element) => {
-      const elementPosition = element.getBoundingClientRect().top;
-      const windowHeight = window.innerHeight;
-
-      if (elementPosition < windowHeight - 100) {
-        element.style.opacity = "1";
-        element.style.transform = "translateY(0)";
-      }
+      element.style.opacity = "0";
+      element.style.transform = "translateY(30px)";
+      element.style.transition = "all 0.6s ease";
     });
-  };
 
-  // Run on load and scroll
-  window.addEventListener("scroll", animateOnScroll);
-  animateOnScroll(); // Run once on page load
-}
+    // Function to check if element is in viewport
+    const animateOnScroll = function () {
+      animateElements.forEach((element) => {
+        const elementPosition = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
 
+        if (elementPosition < windowHeight - 100) {
+          element.style.opacity = "1";
+          element.style.transform = "translateY(0)";
+        }
+      });
+    };
 
-// ======================
-// 8. Experience Animations
-// ======================
-function setupExperienceAnimations() {
-  const experienceElements = document.querySelectorAll(
-    ".experience-section .animate-in"
-  );
+    // Run on load and scroll
+    window.addEventListener("scroll", animateOnScroll);
+    animateOnScroll(); // Run once on page load
+  }
 
-  // Set initial state
-  experienceElements.forEach((element) => {
-    element.style.opacity = "0";
-    element.style.transform = "translateY(30px)";
-    element.style.transition = "all 0.6s ease";
-  });
+  // ======================
+  // 9. Experience Animations
+  // ======================
+  function setupExperienceAnimations() {
+    const experienceElements = document.querySelectorAll(
+      ".experience-section .animate-in"
+    );
 
-  const animateExperienceOnScroll = function () {
+    // Set initial state
     experienceElements.forEach((element) => {
-      const elementPosition = element.getBoundingClientRect().top;
-      const windowHeight = window.innerHeight;
-
-      if (elementPosition < windowHeight - 100) {
-        element.style.opacity = "1";
-        element.style.transform = "translateY(0)";
-      }
+      element.style.opacity = "0";
+      element.style.transform = "translateY(30px)";
+      element.style.transition = "all 0.6s ease";
     });
-  };
 
-  window.addEventListener("scroll", animateExperienceOnScroll);
-  animateExperienceOnScroll(); // Run once on page load
-}
+    const animateExperienceOnScroll = function () {
+      experienceElements.forEach((element) => {
+        const elementPosition = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
 
+        if (elementPosition < windowHeight - 100) {
+          element.style.opacity = "1";
+          element.style.transform = "translateY(0)";
+        }
+      });
+    };
 
-// Add this to your existing JavaScript
-function setupCVDownload() {
-    const downloadBtn = document.querySelector('.download-btn');
-    if (downloadBtn) {
-        downloadBtn.addEventListener('click', function() {
-            // You could add analytics or a confirmation here
-            console.log('CV download initiated');
+    window.addEventListener("scroll", animateExperienceOnScroll);
+    animateExperienceOnScroll(); // Run once on page load
+  }
+
+  // Initialize all features
+ // ======================
+// 10. Rating Slip Button Handling
+// ======================
+function setupRatingSlipButtons() {
+    // View button
+    document.querySelectorAll('.rating-slip-button.view').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const pdfUrl = this.getAttribute('href');
+            console.log('Rating slip viewed:', pdfUrl);
+            window.open(pdfUrl, '_blank');
+            
+            // You could add analytics here
+            // trackButtonClick('View Rating Slip');
         });
-    }
+    });
+
+    // Download button
+    document.querySelectorAll('.rating-slip-button.download').forEach(button => {
+        button.addEventListener('click', function(e) {
+            console.log('Rating slip download initiated');
+            
+            // Let default download behavior proceed
+            // You could add analytics here
+            // trackButtonClick('Download Rating Slip');
+        });
+    });
 }
 
-// Add setupCVDownload to your init function
+// Update your init function to include this
 function init() {
     setupSmoothScrolling();
     setupActiveNavHighlight();
@@ -280,6 +314,10 @@ function init() {
     setupProjectSliders();
     setupSkillsAnimations();
     setupExperienceAnimations();
-    setupCVDownload(); // Add this line
+    setupRatingSlipButtons(); // Add this line
     console.log("All JavaScript features initialized");
 }
+
+  // Start everything
+  init();
+});
