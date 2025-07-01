@@ -519,6 +519,7 @@ footer .container {
   flex: 2;
   min-width: 300px;
 }
+
 }
 
 @media (max-width: 480px) {
@@ -531,7 +532,7 @@ footer .container {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-}
+  }
 
 .skill-badges > * {
   width: 120px;
@@ -546,6 +547,43 @@ footer .container {
   background: #f0f0f0;
   border-radius: 20px;
   font-size: 0.80rem; /* Reduced font size */
+  line-height: 1.2; /* Tighter line spacing */
+  transition: all 0.2s ease; /* Smooth transition for hover effects */
+  }
+
+  .skill-category-image {
+    height: 200px;
+  }
+
+  .skill-category-image {
+  flex: 1;
+  min-width: 150px;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 150px;
+  }
+
+  .skill-category-details {
+  flex: 2;
+  min-width: 150px;
+  }
+}
+
+@media (max-width: 360px) {
+ 
+.skill-badges > * {
+  width: 110px;
+  min-height: 60px;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  word-break: break-word;
+  overflow: hidden;
+  background: #f0f0f0;
+  border-radius: 20px;
+  font-size: 0.65rem; /* Reduced font size */
   line-height: 1.2; /* Tighter line spacing */
   transition: all 0.2s ease; /* Smooth transition for hover effects */
 }
