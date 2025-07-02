@@ -487,10 +487,6 @@ footer .container {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  .menu-toggle.active {
-    display: none;
-  }
-
   /* Mobile Navigation Buttons */
   .mobile-nav-buttons {
     display: flex;
