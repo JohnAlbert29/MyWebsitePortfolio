@@ -22,9 +22,9 @@
 
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.6;
+  line-height:2.7;
   color: var(--text-color);
-  background-color: var(--light-color);
+  background-color: var(--primary-color);
   padding: 0;
 }
 
@@ -83,6 +83,20 @@ a {
 /* ============================================= */
 
 /* Header */
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
 header {
   background: var(--primary-color);
   color: var(--white);
@@ -171,10 +185,11 @@ nav ul li a.active:after {
 
 /* ===== HORIZONTAL FOOTER ===== */
 footer {
-  background:#1a237e ;
+  background: #1a237e;
   color: var(--light-color);
   padding: 1.5rem 0;
   font-size: 0.95rem;
+  margin-top: auto; /* This will push footer to bottom */
 }
 
 .footer-row {
@@ -188,7 +203,6 @@ footer {
   justify-content: center;
   flex-wrap: wrap;
   gap: 2rem;
-  margin-bottom: 0.5rem;
 }
 
 .contact-item {
