@@ -85,122 +85,122 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
 
-      header .container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 20px;
-        position: relative;
-      }
+    header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    position: relative;
+    }
 
-      header h1 {
-        font-size: 1.5rem;
-        margin: 0;
-        color: var(--white);
-      }
+    header h1 {
+    font-size: 1.5rem;
+    margin: 0;
+    color: var(--white);
+    }
 
-      /* Hamburger Menu - Updated */
-      .menu-toggle {
-        display: none;
-        cursor: pointer;
-        padding: 10px;
-        z-index: 101;
-      }
+  /* Hamburger Menu - Updated */
+    .menu-toggle {
+    display: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 101;
+    }
 
-      .menu-toggle i {
-        font-size: 1.5rem;
-        color: var(--white);
-      }
+    .menu-toggle i {
+    font-size: 1.5rem;
+    color: var(--white);
+    }
 
-      /* Navigation - Updated to match academic.html */
-      nav ul {
-        display: flex;
-        gap: 1.5rem;
-      }
+  /* Navigation - Updated to match academic.html */
+    nav ul {
+    display: flex;
+    gap: 1.5rem;
+    }
 
-      nav ul li a {
-        padding: 0.5rem 0;
-        position: relative;
-        transition: color 0.3s ease;
-        color: var(--white);
-        font-weight: 500;
-      }
+    nav ul li a {
+    padding: 0.5rem 0;
+    position: relative;
+    transition: color 0.3s ease;
+    color: var(--white);
+    font-weight: 500;
+    }
 
-      nav ul li a:hover {
-        color: var(--secondary-color);
-      }
+    nav ul li a:hover {
+    color: var(--secondary-color);
+    }
 
-      nav ul li a.active {
-        color: var(--secondary-color);
-      }
+    nav ul li a.active {
+    color: var(--secondary-color);
+    }
 
-      nav ul li a.active:after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 3px;
-        background: var(--secondary-color);
-      }
+    nav ul li a.active:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--secondary-color);
+    }
 
-      /* Project Section Enhancements */
-      .projects-section {
-        padding: 2rem 0;
-      }
+  /* Project Section Enhancements */
+    .projects-section {
+     padding: 2rem 0;
+    }
 
-      .project-item {
-        background: var(--white);
-        border-radius: 12px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-        padding: 1.5rem;
-        margin-bottom: 2rem;
-        transition: transform 0.3s ease;
-      }
+    .project-item {
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease;
+    }
 
-      .project-item:hover {
-        transform: translateY(-5px);
-      }
+    .project-item:hover {
+    transform: translateY(-5px);
+    }
 
-      .project-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 1rem;
-        flex-wrap: wrap;
-      }
+    .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    }
 
-      .project-type {
-        background: var(--secondary-color);
-        color: var(--dark-color);
-        padding: 0.5rem 1rem;
-        border-radius: 20px;
-        font-weight: 600;
-        font-size: 0.9rem;
-        margin-top: 0.5rem;
-      }
+    .project-type {
+    background: var(--secondary-color);
+    color: var(--dark-color);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    }
 
-      .project-description {
-        margin-bottom: 1.5rem;
-        color: var(--text-color);
-        font-size: 1rem;
-      }
+    .project-description {
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    font-size: 1rem;
+    }
 
-      .project-tech {
-        display: flex;
-        flex-wrap:wrap;
-        gap: 0.8rem;
-        margin: 1.5rem 0;
-      }
+    .project-tech {
+    display: flex;
+    flex-wrap:wrap;
+    gap: 0.8rem;
+    margin: 1.5rem 0;
+    }
 
-      .project-tech span {
-        background: var(--primary-color);
-        color: white;
-        padding: 0.5rem 1rem;
-        border-radius: 5px;
-        font-size: 0.9rem;
-        font-weight: 500;
-      }
+    .project-tech span {
+    background: var(--primary-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    }
 
       /* Enhanced Slider */
       .project-slider {
@@ -619,43 +619,43 @@
   padding: 1.2rem;
   }
 
-        .project-header h2 {
-          font-size: 1.3rem;
-        }
+  .project-header h2 {
+  font-size: 1.3rem;
+  }
 
-        .project-header h3 {
-          font-size: 1.1rem;
-        }
+  .project-header h3 {
+  font-size: 1.1rem;
+  }
 
-        .mobile-nav-buttons {
-        display: flex;
-       }
-      }
+  .mobile-nav-buttons {
+  display: flex;
+  }
+  }
 
-      @media (max-width: 480px) {
+  @media (max-width: 480px) {
       
-        .project-type {
-        background: var(--secondary-color);
-        color: var(--dark-color);
-        border-radius: 20px;
-        font-weight: 600;
-        font-size: 0.7rem;
-        }
+  .project-type {
+  background: var(--secondary-color);
+  color: var(--dark-color);
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.7rem;
+  }
 
-        .business-list {
-        font-size: 0.8rem;
-        font-weight: 400;
-        }
+  .business-list {
+  font-size: 0.8rem;
+  font-weight: 400;
+  }
 
-        .business-item {
-        display: flex;
-        align-items: center;
-        margin-bottom: 0.8rem;
-        padding: 0.8rem;
-        background: rgba(255, 215, 0, 0.1);
-        border-radius: 20px;
-        transition: all 0.3s ease;
-       }
+  .business-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  padding: 0.8rem;
+  background: rgba(255, 215, 0, 0.1);
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  }
         .business-item i {
           color: var(--dark-color);
         width: 20px;

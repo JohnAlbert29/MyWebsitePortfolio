@@ -365,6 +365,67 @@ footer .container {
     color: var(--white);
 }
 
+/* ============================================= */
+/* REFERENCES SECTION */
+/* ============================================= */
+
+.references-section {
+  padding: 2rem 0 4rem;
+}
+
+.references-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.reference-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.reference-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.reference-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.reference-header i {
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-right: 1rem;
+}
+
+.reference-header h3 {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+.reference-detail {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.reference-detail i {
+  width: 24px;
+  color: var(--secondary-color);
+  margin-right: 1rem;
+  text-align: center;
+}
+
 @media (max-width: 768px) {
     .mobile-nav-buttons {
         display: flex;
