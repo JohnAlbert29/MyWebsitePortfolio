@@ -22,7 +22,7 @@
 
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  line-height:2.7;
+  line-height:2;
   color: var(--text-color);
   background-color: var(--primary-color);
   padding: 0;
@@ -83,9 +83,6 @@ a {
 /* ============================================= */
 
 /* Header */
-html, body {
-  height: 100%;
-}
 
 body {
   margin: 0;
