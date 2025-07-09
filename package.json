@@ -1,7 +1,17 @@
 {
   "name": "analytics",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "your-build-command",
+    "start": "your-start-command"   
+  },
   "dependencies": {
     "@supabase/supabase-js": "^2.0.0",
-    "node-fetch": "^2.6.7"
+    "node-fetch": "^2.6.7",
+    "netlify-lambda": "^2.0.15"   
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.12",     
+    "@babel/preset-env": "^7.20.2" 
   }
 }
