@@ -1,4 +1,4 @@
-// analytics.js - Complete Working Version
+// analytics.js - Complete Final Version
 document.addEventListener("DOMContentLoaded", function() {
     if (window.location.pathname.includes('analytics.html')) {
         loadAnalyticsData().then(renderAnalyticsDashboard);
@@ -9,17 +9,16 @@ document.addEventListener("DOMContentLoaded", function() {
     trackPageView();
 });
 
-// Track a page view with all relevant data
 async function trackPageView() {
     const analyticsData = JSON.parse(localStorage.getItem('websiteAnalytics') || '{}');
     
     // Generate or get visitor ID
     if (!analyticsData.visitorId) {
         analyticsData.visitorId = 'vis-' + Math.random().toString(36).substr(2, 9);
-        analyticsData.firstVisit = new Date().toISOString();
+        analyticsData.firstVisit = Date.now();
     }
     
-    analyticsData.lastVisit = new Date().toISOString();
+    analyticsData.lastVisit = Date.now();
     
     // Record the page view
     if (!analyticsData.views) {
@@ -27,10 +26,10 @@ async function trackPageView() {
     }
     
     const pageView = {
-        timestamp: new Date().toISOString(),
+        timestamp: Date.now(),
         page: {
             url: window.location.pathname,
-            title: document.title,
+            title: cleanTitle(document.title),
             referrer: document.referrer
         },
         visitor: {
@@ -48,10 +47,15 @@ async function trackPageView() {
     localStorage.setItem('websiteAnalytics', JSON.stringify(analyticsData));
     
     // Submit to Netlify
-    await submitToNetlify(pageView); // Changed to send only the new view
+    await submitToNetlify(pageView);
 }
 
-// Submit data via fetch API
+function cleanTitle(title) {
+    if (!title) return 'Untitled Page';
+    // Remove duplicate words and trim whitespace
+    return title.replace(/(\b\w+\b)(?=.*\b\1\b)/gi, '').trim() || 'My Portfolio';
+}
+
 async function submitToNetlify(data) {
     try {
         const response = await fetch('/submit-analytics', {
@@ -70,7 +74,6 @@ async function submitToNetlify(data) {
     }
 }
 
-// Load data from server
 async function loadAnalyticsData() {
     const localData = JSON.parse(localStorage.getItem('websiteAnalytics') || '{}');
     
@@ -92,12 +95,14 @@ function mergeData(localData, serverData) {
         ...serverData,
         ...localData,
         views: [...(serverData.views || []), ...(localData.views || [])]
-            .filter((v, i, a) => a.findIndex(t => t.timestamp === v.timestamp) === i)
-            .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+            .filter((v, i, a) => a.findIndex(t => 
+                t.timestamp === v.timestamp && 
+                t.page.url === v.page.url
+            ) === i)
+            .sort((a, b) => b.timestamp - a.timestamp)
     };
 }
 
-// Dashboard rendering functions
 function renderAnalyticsDashboard() {
     const analyticsData = JSON.parse(localStorage.getItem('websiteAnalytics') || '{}');
     const views = analyticsData.views || [];
@@ -208,10 +213,19 @@ function renderRecentActivity() {
         if (width < 768) deviceType = 'mobile';
         else if (width < 1024) deviceType = 'tablet';
         
+        const date = new Date(view.timestamp);
+        const formattedDate = isNaN(date.getTime()) ? 'N/A' : 
+            date.toLocaleString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${view.page.title || view.page.url}</td>
-            <td>${new Date(view.timing.timestamp).toLocaleString()}</td>
+            <td>${formattedDate}</td>
             <td><span class="device-badge ${deviceType}">${deviceType}</span></td>
             <td>${view.visitor.screenWidth}×${view.visitor.screenHeight}</td>
         `;
