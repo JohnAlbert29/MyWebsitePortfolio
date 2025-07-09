@@ -1,10 +1,11 @@
-// netlify/functions/process-analytics.js
 const { createClient } = require('@supabase/supabase-js');
 const fetch = require('node-fetch');
 
-const supabaseUrl = 'YOUR_SUPABASE_URL';
-const supabaseKey = 'YOUR_SUPABASE_KEY';
-const supabase = createClient(supabaseUrl, supabaseKey);
+// Initialize Supabase
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_KEY
+);
 
 const getCountryFromIP = async (ip) => {
   if (ip === 'unknown') return 'Unknown';
@@ -34,7 +35,9 @@ exports.handler = async (event) => {
         screen_width: data.visitor?.screenWidth,
         screen_height: data.visitor?.screenHeight,
         country: await getCountryFromIP(ip),
-        device_type: getDeviceType(data.visitor?.screenWidth)
+        device_type: getDeviceType(data.visitor?.screenWidth),
+        user_agent: data.visitor?.userAgent,
+        referrer: data.page?.referrer
       }]);
 
     if (error) throw error;
