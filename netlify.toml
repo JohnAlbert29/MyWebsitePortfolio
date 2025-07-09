@@ -1,12 +1,12 @@
 [build]
-  command = "npm install"
-  publish = "."
+  command = "npm install && npm run build"  # Added build command
+  publish = "dist"  # Changed to typical output directory
   functions = "netlify/functions"
 
 [functions]
   node_bundler = "esbuild"
   external_node_modules = ["@supabase/supabase-js", "node-fetch"]
-  timeout = 10 # seconds
+  timeout = 30  # Increased timeout
 
 [[redirects]]
   from = "/"
@@ -29,10 +29,6 @@
   SUPABASE_URL = "https://lcxfeysomksslwzhqhwr.supabase.co"
   SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxjeGZleXNvbWtzc2x3emhxaHdyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIwODgzMzcsImV4cCI6MjA2NzY2NDMzN30.DvD8jfcZLvHdd2Djcd8AJ2wEiutmgkDLBRY5E4Qb3D4"
 
-[context.deploy-preview.environment]
-  SUPABASE_URL = "https://lcxfeysomksslwzhqhwr.supabase.co"
-  SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxjeGZleXNvbWtzc2x3emhxaHdyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIwODgzMzcsImV4cCI6MjA2NzY2NDMzN30.DvD8jfcZLvHdd2Djcd8AJ2wEiutmgkDLBRY5E4Qb3D4"
-
 [[headers]]
   for = "/*"
   [headers.values]
@@ -42,11 +38,4 @@
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
-    Content-Security-Policy = """
-      default-src 'self';
-      script-src 'self' https://cdn.jsdelivr.net;
-      style-src 'self' 'unsafe-inline';
-      img-src 'self' data:;
-      connect-src 'self' https://*.supabase.co https://api.ipify.org;
-      frame-ancestors 'none';
-    """
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://*.supabase.co https://api.ipify.org; frame-ancestors 'none';"
