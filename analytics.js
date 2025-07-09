@@ -1,7 +1,6 @@
 // Chart instances storage
 const chartInstances = {
   globalDevice: null,
-  trafficTrend: null
 };
 
 // Initialize analytics when DOM loads
@@ -21,7 +20,6 @@ function cleanupCharts() {
     }
   });
   chartInstances.globalDevice = null;
-  chartInstances.trafficTrend = null;
 }
 
 // Track a page view
@@ -266,7 +264,6 @@ function renderGlobalAnalytics(analyticsData) {
   cleanupCharts(); // Clean up existing charts first
   const views = analyticsData.views || [];
   renderGlobalDeviceChart(views);
-  renderTrafficTrendChart(views);
   renderCountryDistribution(views);
 }
 

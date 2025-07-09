@@ -1,10 +1,12 @@
 [build]
-  functions = "netlify/functions"
+  command = "npm install"
   publish = "."
+  functions = "netlify/functions"
 
 [functions]
   node_bundler = "esbuild"
-  external_node_modules = ["node-fetch"]
+  external_node_modules = ["@supabase/supabase-js", "node-fetch"]
+  timeout = 10 # seconds
 
 [[redirects]]
   from = "/"
@@ -24,9 +26,27 @@
   force = true
 
 [context.production.environment]
-  SUPABASE_URL = "your-supabase-url"
-  SUPABASE_KEY = "your-supabase-key"
-  ANALYTICS_ENABLED = "true"
-  
+  SUPABASE_URL = "https://lcxfeysomksslwzhqhwr.supabase.co"
+  SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxjeGZleXNvbWtzc2x3emhxaHdyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIwODgzMzcsImV4cCI6MjA2NzY2NDMzN30.DvD8jfcZLvHdd2Djcd8AJ2wEiutmgkDLBRY5E4Qb3D4"
+
 [context.deploy-preview.environment]
-  ANALYTICS_ENABLED = "false"
+  SUPABASE_URL = "https://lcxfeysomksslwzhqhwr.supabase.co"
+  SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxjeGZleXNvbWtzc2x3emhxaHdyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIwODgzMzcsImV4cCI6MjA2NzY2NDMzN30.DvD8jfcZLvHdd2Djcd8AJ2wEiutmgkDLBRY5E4Qb3D4"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type"
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Content-Security-Policy = """
+      default-src 'self';
+      script-src 'self' https://cdn.jsdelivr.net;
+      style-src 'self' 'unsafe-inline';
+      img-src 'self' data:;
+      connect-src 'self' https://*.supabase.co https://api.ipify.org;
+      frame-ancestors 'none';
+    """
