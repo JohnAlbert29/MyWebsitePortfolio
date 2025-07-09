@@ -1,8 +1,10 @@
 {
+    
   "name": "analytics",
   "version": "1.0.0",
-  "scripts": {
-    "build": "mkdir -p dist && cp *.html dist/ && cp *.js dist/",
+   "scripts": {
+    "build": "mkdir -p dist && cp -r *.html *.css *.js images/ netlify/ dist/",
+    "postbuild": "find dist -type f -name '*.html' -exec sed -i '' 's/href=\"/href=\"\\//g' {} +",
     "start": "serve dist"
   },
   "dependencies": {
