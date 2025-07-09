@@ -8,11 +8,11 @@
   external_node_modules = ["@supabase/supabase-js", "node-fetch"]
 
 [functions.settings]
-  timeout = 30  # timeout in seconds
+  timeout = 30
 
 [[redirects]]
   from = "/"
-  to = "/analytics.html"
+  to = "/index.html"
   status = 200
 
 [[redirects]]
@@ -40,4 +40,25 @@
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://*.supabase.co https://api.ipify.org; frame-ancestors 'none';"
+    Content-Security-Policy = """
+      default-src 'self';
+      script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline' 'unsafe-eval';
+      style-src 'self' https://cdnjs.cloudflare.com 'unsafe-inline';
+      img-src 'self' data: https://*.supabase.co https://your-images-domain.com;
+      font-src 'self' https://cdnjs.cloudflare.com;
+      connect-src 'self' https://*.supabase.co https://api.ipify.org https://ipapi.co;
+      frame-ancestors 'none';
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self';
+    """
+
+# Development-specific settings
+[context.deploy-preview.environment]
+  SUPABASE_URL = "https://lcxfeysomksslwzhqhwr.supabase.co"
+  SUPABASE_ANON_KEY = "your-anon-key-here"
+
+[dev]
+  framework = "#static"
+  targetPort = 3000
+  autoLaunch = false
