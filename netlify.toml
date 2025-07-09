@@ -1,12 +1,14 @@
 [build]
-  command = "npm install && npm run build"  # Added build command
-  publish = "dist"  # Changed to typical output directory
+  command = "npm install && npm run build"
+  publish = "dist"
   functions = "netlify/functions"
 
 [functions]
   node_bundler = "esbuild"
   external_node_modules = ["@supabase/supabase-js", "node-fetch"]
-  timeout = 30  # Increased timeout
+
+[functions.settings]
+  timeout = 30  # timeout in seconds
 
 [[redirects]]
   from = "/"
