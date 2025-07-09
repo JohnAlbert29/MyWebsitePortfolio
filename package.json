@@ -2,16 +2,14 @@
   "name": "analytics",
   "version": "1.0.0",
   "scripts": {
-    "build": "your-build-command",
-    "start": "your-start-command"   
+    "build": "mkdir -p dist && cp *.html dist/ && cp *.js dist/",
+    "start": "serve dist"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.0.0",
-    "node-fetch": "^2.6.7",
-    "netlify-lambda": "^2.0.15"   
+    "node-fetch": "^2.6.7"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.12",     
-    "@babel/preset-env": "^7.20.2" 
+    "serve": "^14.2.0"
   }
 }
