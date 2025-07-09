@@ -1,35 +1,36 @@
-const fs = require('fs');
-const path = require('path');
+// netlify/functions/get-analytics.js
+const { createClient } = require('@supabase/supabase-js');
+
+const supabase = createClient(
+  'YOUR_SUPABASE_URL',
+  'YOUR_SUPABASE_KEY'
+);
 
 exports.handler = async (event) => {
-    const headers = {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Content-Type': 'application/json'
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'application/json'
+  };
+
+  try {
+    const { data, error } = await supabase
+      .from('analytics')
+      .select('*')
+      .order('timestamp', { ascending: false })
+      .limit(1000);
+
+    if (error) throw error;
+
+    return {
+      statusCode: 200,
+      headers,
+      body: JSON.stringify({ views: data || [] })
     };
-
-    if (event.httpMethod === 'OPTIONS') {
-        return { statusCode: 200, headers };
-    }
-
-    try {
-        const dataPath = path.join('/tmp', 'analytics-data.json');
-        let analyticsData = { views: [] };
-
-        if (fs.existsSync(dataPath)) {
-            analyticsData = JSON.parse(fs.readFileSync(dataPath));
-        }
-
-        return {
-            statusCode: 200,
-            headers,
-            body: JSON.stringify(analyticsData)
-        };
-    } catch (error) {
-        return {
-            statusCode: 500,
-            headers,
-            body: JSON.stringify({ error: error.message })
-        };
-    }
+  } catch (error) {
+    return {
+      statusCode: 500,
+      headers,
+      body: JSON.stringify({ error: error.message })
+    };
+  }
 };
