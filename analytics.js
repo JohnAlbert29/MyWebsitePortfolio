@@ -1,4 +1,4 @@
-// analytics.js - Complete Final Version
+// analytics.js - Complete Working Version with Global Analytics
 document.addEventListener("DOMContentLoaded", function() {
     if (window.location.pathname.includes('analytics.html')) {
         loadAnalyticsData().then(renderAnalyticsDashboard);
@@ -35,7 +35,8 @@ async function trackPageView() {
         visitor: {
             screenWidth: window.screen.width,
             screenHeight: window.screen.height,
-            userAgent: navigator.userAgent
+            userAgent: navigator.userAgent,
+            ip: await getClientIP()
         },
         timing: {
             pageLoadTime: window.performance.timing?.loadEventEnd - window.performance.timing?.navigationStart || 0,
@@ -45,38 +46,42 @@ async function trackPageView() {
     
     analyticsData.views.push(pageView);
     localStorage.setItem('websiteAnalytics', JSON.stringify(analyticsData));
-    
-    // Submit to Netlify
     await submitToNetlify(pageView);
+}
+
+async function getClientIP() {
+    try {
+        const response = await fetch('https://api.ipify.org?format=json');
+        const data = await response.json();
+        return data.ip || 'unknown';
+    } catch {
+        return 'unknown';
+    }
 }
 
 function cleanTitle(title) {
     if (!title) return 'Untitled Page';
-    // Remove duplicate words and trim whitespace
-    return title.replace(/(\b\w+\b)(?=.*\b\1\b)/gi, '').trim() || 'My Portfolio';
+    return title.replace(/[^a-zA-Z0-9 ]/g, '')
+               .replace(/\s+/g, ' ')
+               .trim()
+               .substring(0, 50) || 'Page';
 }
 
 async function submitToNetlify(data) {
     try {
         const response = await fetch('/submit-analytics', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         });
-        
-        if (!response.ok) {
-            console.error('Submission failed:', await response.text());
-        }
+        if (!response.ok) throw new Error('Submission failed');
     } catch (error) {
-        console.error('Network error:', error);
+        console.error('Analytics submission error:', error);
     }
 }
 
 async function loadAnalyticsData() {
     const localData = JSON.parse(localStorage.getItem('websiteAnalytics') || '{}');
-    
     try {
         const response = await fetch('/get-analytics');
         if (response.ok) {
@@ -86,21 +91,26 @@ async function loadAnalyticsData() {
     } catch (error) {
         console.error('Error loading analytics:', error);
     }
-    
     return localData;
 }
 
 function mergeData(localData, serverData) {
-    return {
+    const merged = {
         ...serverData,
         ...localData,
         views: [...(serverData.views || []), ...(localData.views || [])]
-            .filter((v, i, a) => a.findIndex(t => 
-                t.timestamp === v.timestamp && 
-                t.page.url === v.page.url
-            ) === i)
-            .sort((a, b) => b.timestamp - a.timestamp)
     };
+    
+    // Deduplicate based on timestamp + URL + IP
+    merged.views = merged.views.filter((v, i, a) => 
+        a.findIndex(t => 
+            t.timestamp === v.timestamp && 
+            t.page.url === v.page.url &&
+            t.visitor.ip === v.visitor.ip
+        ) === i
+    ).sort((a, b) => b.timestamp - a.timestamp);
+    
+    return merged;
 }
 
 function renderAnalyticsDashboard() {
@@ -124,18 +134,17 @@ function renderAnalyticsDashboard() {
     document.getElementById('avg-dom-time').textContent = 
         domTimes.length ? Math.round(domTimes.reduce((a,b) => a + b, 0) / domTimes.length) : 'N/A';
     
-    // Render charts
-    renderDeviceChart();
-    renderPageViewsChart();
-    renderRecentActivity();
+    // Render all visualizations
+    renderDeviceChart(views);
+    renderPageViewsChart(views);
+    renderRecentActivity(views);
+    renderGlobalAnalytics(analyticsData);
 }
 
-function renderDeviceChart() {
-    const analyticsData = JSON.parse(localStorage.getItem('websiteAnalytics') || '{}');
-    const views = analyticsData.views || [];
+function renderDeviceChart(views) {
     const container = document.getElementById('device-chart');
-    
     const devices = { desktop: 0, tablet: 0, mobile: 0 };
+    
     views.forEach(view => {
         const width = view.visitor.screenWidth;
         if (width >= 1024) devices.desktop++;
@@ -168,12 +177,10 @@ function renderDeviceChart() {
     });
 }
 
-function renderPageViewsChart() {
-    const analyticsData = JSON.parse(localStorage.getItem('websiteAnalytics') || '{}');
-    const views = analyticsData.views || [];
+function renderPageViewsChart(views) {
     const container = document.getElementById('page-views-chart');
-    
     const pageCounts = {};
+    
     views.forEach(view => {
         const page = view.page.url;
         pageCounts[page] = (pageCounts[page] || 0) + 1;
@@ -199,15 +206,11 @@ function renderPageViewsChart() {
     });
 }
 
-function renderRecentActivity() {
-    const analyticsData = JSON.parse(localStorage.getItem('websiteAnalytics') || '{}');
-    const views = analyticsData.views || [];
+function renderRecentActivity(views) {
     const tbody = document.querySelector('#recent-activity tbody');
-    
-    tbody.innerHTML = '';
     const recentViews = views.slice(-10).reverse();
     
-    recentViews.forEach(view => {
+    tbody.innerHTML = recentViews.map(view => {
         const width = view.visitor.screenWidth;
         let deviceType = 'desktop';
         if (width < 768) deviceType = 'mobile';
@@ -222,13 +225,137 @@ function renderRecentActivity() {
                 minute: '2-digit'
             });
         
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${view.page.title || view.page.url}</td>
-            <td>${formattedDate}</td>
-            <td><span class="device-badge ${deviceType}">${deviceType}</span></td>
-            <td>${view.visitor.screenWidth}×${view.visitor.screenHeight}</td>
+        return `
+            <tr>
+                <td>${view.page.title || view.page.url}</td>
+                <td>${formattedDate}</td>
+                <td><span class="device-badge ${deviceType}">${deviceType}</span></td>
+                <td>${view.visitor.screenWidth}×${view.visitor.screenHeight}</td>
+            </tr>
         `;
-        tbody.appendChild(row);
+    }).join('');
+}
+
+function renderGlobalAnalytics(analyticsData) {
+    const views = analyticsData.views || [];
+    renderGlobalDeviceChart(views);
+    renderTrafficTrendChart(views);
+    renderCountryDistribution(views);
+}
+
+function renderGlobalDeviceChart(views) {
+    const ctx = document.getElementById('global-device-chart').getContext('2d');
+    
+    // Destroy previous chart if it exists
+    if (window.globalDeviceChart) {
+        window.globalDeviceChart.destroy();
+    }
+    
+    const devices = { desktop: 0, tablet: 0, mobile: 0 };
+    views.forEach(view => {
+        const width = view.visitor.screenWidth;
+        if (width >= 1024) devices.desktop++;
+        else if (width >= 768) devices.tablet++;
+        else devices.mobile++;
     });
+
+    window.globalDeviceChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Desktop', 'Tablet', 'Mobile'],
+            datasets: [{
+                data: [devices.desktop, devices.tablet, devices.mobile],
+                backgroundColor: [
+                    'rgba(26, 35, 126, 0.7)',
+                    'rgba(255, 215, 0, 0.7)',
+                    'rgba(69, 90, 100, 0.7)'
+                ],
+                borderColor: [
+                    'rgba(26, 35, 126, 1)',
+                    'rgba(255, 215, 0, 1)',
+                    'rgba(69, 90, 100, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                },
+                title: {
+                    display: true,
+                    text: 'Global Device Distribution'
+                }
+            }
+        }
+    });
+}
+
+function renderTrafficTrendChart(views) {
+    const ctx = document.getElementById('traffic-trend-chart').getContext('2d');
+    
+    // Destroy previous chart if it exists
+    if (window.trafficTrendChart) {
+        window.trafficTrendChart.destroy();
+    }
+    
+    // Group by date
+    const dailyCounts = {};
+    views.forEach(view => {
+        const date = new Date(view.timestamp).toLocaleDateString();
+        dailyCounts[date] = (dailyCounts[date] || 0) + 1;
+    });
+
+    const dates = Object.keys(dailyCounts).sort();
+    const counts = dates.map(date => dailyCounts[date]);
+
+    window.trafficTrendChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: dates,
+            datasets: [{
+                label: 'Visits',
+                data: counts,
+                backgroundColor: 'rgba(26, 35, 126, 0.2)',
+                borderColor: 'rgba(26, 35, 126, 1)',
+                borderWidth: 2,
+                tension: 0.1,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Traffic Over Time'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
+function renderCountryDistribution(views) {
+    const container = document.getElementById('country-distribution');
+    const countries = {};
+    
+    views.forEach(view => {
+        const country = view.visitor.country || 'Unknown';
+        countries[country] = (countries[country] || 0) + 1;
+    });
+
+    container.innerHTML = Object.entries(countries)
+        .sort((a, b) => b[1] - a[1])
+        .map(([country, count]) => 
+            `<span class="country-badge">${country}: ${count}</span>`
+        ).join(' ');
 }

@@ -6,9 +6,9 @@
     <title>Website Analytics Dashboard</title>
     <style>
         :root {
-          --primary-color: #1a237e; /* Deep Blue */
-          --secondary-color: Gold; /* Gold */
-          --accent-color: #455a64; /* Slate Gray */
+          --primary-color: #1a237e;
+          --secondary-color: Gold;
+          --accent-color: #455a64;
           --light-color: #f5f5f5;
           --dark-color: #212121;
           --text-color: #333333;
@@ -23,7 +23,7 @@
             padding: 20px;
         }
         .dashboard {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
             background: var(--white);
             border-radius: 12px;
@@ -58,6 +58,7 @@
             padding: 15px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             border: 1px solid var(--light-color);
+            height: 400px;
         }
         table {
             width: 100%;
@@ -99,7 +100,6 @@
             color: var(--white);
         }
         
-        /* Added some additional styling for better visual hierarchy */
         h2 {
             color: var(--primary-color);
             margin-top: 0;
@@ -110,7 +110,32 @@
         .stat-card p strong {
             color: var(--accent-color);
         }
+
+        /* New Global Analytics Styles */
+        .global-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .chart-wrapper {
+            position: relative;
+            height: 100%;
+        }
+        
+        .country-badge {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 10px;
+            background: #e0e0e0;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
     </style>
+    <!-- Add Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="dashboard">
@@ -152,11 +177,35 @@
             </thead>
             <tbody></tbody>
         </table>
+        
+        <!-- New Global Analytics Section -->
+        <h2>Global Analytics</h2>
+        <div class="global-grid">
+            <div class="chart-container">
+                <h3>Device Distribution Worldwide</h3>
+                <div class="chart-wrapper">
+                    <canvas id="global-device-chart"></canvas>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <h3>Traffic Over Time</h3>
+                <div class="chart-wrapper">
+                    <canvas id="traffic-trend-chart"></canvas>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <h3>Visitor Locations</h3>
+                <div id="country-distribution">
+                    <p>Loading country data...</p>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script src="analytics.js"></script>
-    <script>
-        // This will be populated by analytics.js
-    </script>
 </body>
 </html>

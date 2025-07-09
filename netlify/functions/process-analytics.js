@@ -65,3 +65,19 @@ exports.handler = async (event) => {
         };
     }
 };
+
+// Add this to your process-analytics.js before saving data
+const getCountryFromIP = async (ip) => {
+    if (ip === 'unknown') return 'Unknown';
+    
+    try {
+        const response = await fetch(`https://ipapi.co/${ip}/country_name/`);
+        return await response.text() || 'Unknown';
+    } catch {
+        return 'Unknown';
+    }
+};
+
+// Modify your handler to include country data
+const country = await getCountryFromIP(newData.visitor.ip);
+newData.visitor.country = country;
