@@ -1,0 +1,51 @@
+[build]
+  # Where your Netlify Functions are located
+  functions = "netlify/functions"
+  
+  # Default build command (adjust if needed)
+  command = "npm run build || echo 'No build needed'"
+  
+  # Directory to publish (your root in this case)
+  publish = "."
+
+# Redirects configuration
+[[redirects]]
+  # Public URL that will trigger analytics processing
+  from = "/submit-analytics"
+  # Internal Netlify Function that handles the data
+  to = "/.netlify/functions/process-analytics"
+  # HTTP status (200 = normal response)
+  status = 200
+  # Force this redirect even if file exists
+  force = true
+
+[[redirects]]
+  # Public URL for fetching analytics data
+  from = "/get-analytics"
+  # Internal Netlify Function that returns data
+  to = "/.netlify/functions/get-analytics"
+  status = 200
+  force = true
+
+# Security headers for your analytics dashboard
+[[headers]]
+  # Only apply to analytics.html
+  for = "/analytics.html"
+  [headers.values]
+    # Basic authentication (CHANGE THESE CREDENTIALS!)
+    Basic-Auth = "admin:YourSecurePasswordHere"
+    
+    # Security headers
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    Content-Security-Policy = "default-src 'self'"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Environment variables (optional)
+[context.production.environment]
+  # Enable analytics tracking in production
+  ANALYTICS_ENABLED = "true"
+  
+[context.deploy-preview.environment]
+  # Disable analytics for preview deploys
+  ANALYTICS_ENABLED = "false"
