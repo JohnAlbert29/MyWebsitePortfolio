@@ -111,7 +111,6 @@
             color: var(--accent-color);
         }
 
-        /* New Global Analytics Styles */
         .global-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -133,8 +132,14 @@
             margin-bottom: 5px;
             font-size: 12px;
         }
+
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
     </style>
-    <!-- Add Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -152,7 +157,7 @@
             
             <div class="stat-card">
                 <h2>Device Breakdown</h2>
-                <div id="device-chart"></div>
+                <div id="device-chart" class="loading">Loading device data...</div>
             </div>
             
             <div class="stat-card">
@@ -163,7 +168,9 @@
         </div>
         
         <h2>Page Views</h2>
-        <div class="chart-container" id="page-views-chart"></div>
+        <div class="chart-container" id="page-views-chart">
+            <div class="loading">Loading page view data...</div>
+        </div>
         
         <h2>Recent Activity</h2>
         <table id="recent-activity">
@@ -173,12 +180,16 @@
                     <th>Time</th>
                     <th>Device</th>
                     <th>Screen Size</th>
+                    <th>Country</th>
                 </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+                <tr>
+                    <td colspan="5" class="loading">Loading recent activity...</td>
+                </tr>
+            </tbody>
         </table>
         
-        <!-- New Global Analytics Section -->
         <h2>Global Analytics</h2>
         <div class="global-grid">
             <div class="chart-container">
@@ -197,14 +208,13 @@
             
             <div class="chart-container">
                 <h3>Visitor Locations</h3>
-                <div id="country-distribution">
-                    <p>Loading country data...</p>
+                <div id="country-distribution" class="loading">
+                    Loading country data...
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="analytics.js"></script>
 </body>
 </html>

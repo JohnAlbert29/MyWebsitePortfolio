@@ -1,4 +1,3 @@
-// analytics.js - Complete Working Version with Global Analytics
 document.addEventListener("DOMContentLoaded", function() {
     if (window.location.pathname.includes('analytics.html')) {
         loadAnalyticsData().then(renderAnalyticsDashboard);
@@ -12,7 +11,6 @@ document.addEventListener("DOMContentLoaded", function() {
 async function trackPageView() {
     const analyticsData = JSON.parse(localStorage.getItem('websiteAnalytics') || '{}');
     
-    // Generate or get visitor ID
     if (!analyticsData.visitorId) {
         analyticsData.visitorId = 'vis-' + Math.random().toString(36).substr(2, 9);
         analyticsData.firstVisit = Date.now();
@@ -20,7 +18,6 @@ async function trackPageView() {
     
     analyticsData.lastVisit = Date.now();
     
-    // Record the page view
     if (!analyticsData.views) {
         analyticsData.views = [];
     }
@@ -101,7 +98,6 @@ function mergeData(localData, serverData) {
         views: [...(serverData.views || []), ...(localData.views || [])]
     };
     
-    // Deduplicate based on timestamp + URL + IP
     merged.views = merged.views.filter((v, i, a) => 
         a.findIndex(t => 
             t.timestamp === v.timestamp && 
@@ -117,7 +113,6 @@ function renderAnalyticsDashboard() {
     const analyticsData = JSON.parse(localStorage.getItem('websiteAnalytics') || '{}');
     const views = analyticsData.views || [];
     
-    // Update overview stats
     document.getElementById('total-views').textContent = views.length;
     document.getElementById('unique-visitors').textContent = analyticsData.visitorId ? '1' : '0';
     document.getElementById('first-visit').textContent = analyticsData.firstVisit ? 
@@ -125,7 +120,6 @@ function renderAnalyticsDashboard() {
     document.getElementById('last-visit').textContent = analyticsData.lastVisit ? 
         new Date(analyticsData.lastVisit).toLocaleString() : 'N/A';
     
-    // Calculate performance metrics
     const loadTimes = views.filter(v => v.timing.pageLoadTime).map(v => v.timing.pageLoadTime);
     const domTimes = views.filter(v => v.timing.domCompleteTime).map(v => v.timing.domCompleteTime);
     
@@ -134,7 +128,6 @@ function renderAnalyticsDashboard() {
     document.getElementById('avg-dom-time').textContent = 
         domTimes.length ? Math.round(domTimes.reduce((a,b) => a + b, 0) / domTimes.length) : 'N/A';
     
-    // Render all visualizations
     renderDeviceChart(views);
     renderPageViewsChart(views);
     renderRecentActivity(views);
@@ -231,9 +224,10 @@ function renderRecentActivity(views) {
                 <td>${formattedDate}</td>
                 <td><span class="device-badge ${deviceType}">${deviceType}</span></td>
                 <td>${view.visitor.screenWidth}×${view.visitor.screenHeight}</td>
+                <td>${view.visitor.country || 'Unknown'}</td>
             </tr>
         `;
-    }).join('');
+    }).join('') || '<tr><td colspan="5">No recent activity found</td></tr>';
 }
 
 function renderGlobalAnalytics(analyticsData) {
@@ -246,7 +240,6 @@ function renderGlobalAnalytics(analyticsData) {
 function renderGlobalDeviceChart(views) {
     const ctx = document.getElementById('global-device-chart').getContext('2d');
     
-    // Destroy previous chart if it exists
     if (window.globalDeviceChart) {
         window.globalDeviceChart.destroy();
     }
@@ -297,12 +290,10 @@ function renderGlobalDeviceChart(views) {
 function renderTrafficTrendChart(views) {
     const ctx = document.getElementById('traffic-trend-chart').getContext('2d');
     
-    // Destroy previous chart if it exists
     if (window.trafficTrendChart) {
         window.trafficTrendChart.destroy();
     }
     
-    // Group by date
     const dailyCounts = {};
     views.forEach(view => {
         const date = new Date(view.timestamp).toLocaleDateString();
@@ -357,5 +348,5 @@ function renderCountryDistribution(views) {
         .sort((a, b) => b[1] - a[1])
         .map(([country, count]) => 
             `<span class="country-badge">${country}: ${count}</span>`
-        ).join(' ');
+        ).join(' ') || '<p>No country data available</p>';
 }

@@ -1,11 +1,11 @@
 [build]
-  # Where your Netlify Functions are located
   functions = "netlify/functions"
-  
-  # Directory to publish (your root directory)
   publish = "."
 
-# Main redirect rules
+[functions]
+  node_bundler = "esbuild"
+  external_node_modules = ["node-fetch"]
+
 [[redirects]]
   from = "/"
   to = "/analytics.html"
@@ -23,14 +23,15 @@
   status = 200
   force = true
 
-# Security headers (temporarily disabled for testing)
-# [[headers]]
-#   for = "/analytics.html"
-#   [headers.values]
-#     X-Frame-Options = "DENY"
-#     X-XSS-Protection = "1; mode=block"
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data:;"
 
-# Environment variables
 [context.production.environment]
   ANALYTICS_ENABLED = "true"
   
