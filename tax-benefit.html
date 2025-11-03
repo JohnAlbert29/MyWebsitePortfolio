@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax & Benefit Information | JAl R. Portfolio</title>
+    <link rel="stylesheet" href="personal-info.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Additional styles for the tax-benefit page */
+        .tax-benefit-section {
+            padding: 4rem 0;
+            background-color: var(--light-color);
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .tax-benefit-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .tax-benefit-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .tax-benefit-header h2 {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .tax-benefit-header h2:after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--secondary-color);
+        }
+        
+        .tax-benefit-header p {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+        }
+        
+        /* National ID Section */
+        .national-id-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2a3a9e 100%);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            color: var(--white);
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(26, 35, 126, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .national-id-section:before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(30deg);
+        }
+        
+        .national-id-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .national-id-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .national-id-icon i {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+        
+        .national-id-header h3 {
+            color: var(--white);
+            font-size: 1.8rem;
+            margin: 0;
+            font-weight: 600;
+        }
+        
+        .national-id-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 1;
+            font-family: 'Courier New', monospace;
+            backdrop-filter: blur(5px);
+        }
+        
+        .numbers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .number-card {
+            background: linear-gradient(135deg, var(--light-color) 0%, #f9f9f9 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--primary-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .number-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .number-card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 80px;
+            height: 80px;
+            background: var(--primary-color);
+            opacity: 0.05;
+            border-radius: 0 0 0 80px;
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            box-shadow: 0 4px 8px rgba(26, 35, 126, 0.2);
+        }
+        
+        .card-icon i {
+            color: var(--white);
+            font-size: 1.3rem;
+        }
+        
+        .card-header h3 {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin: 0;
+            font-weight: 600;
+        }
+        
+        .number-display {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            letter-spacing: 1px;
+            padding: 1rem;
+            background: var(--white);
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .number-display:hover {
+            background: var(--secondary-color);
+            color: var(--dark-color);
+            transform: scale(1.02);
+        }
+        
+        .print-section {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .print-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .print-btn:hover {
+            background: var(--secondary-color);
+            color: var(--dark-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Print-specific styles */
+        @media print {
+            header, footer, .mobile-nav-buttons, .print-btn {
+                display: none !important;
+            }
+            
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            
+            .tax-benefit-container {
+                box-shadow: none;
+                padding: 0;
+                margin: 0;
+                max-width: 100%;
+            }
+            
+            .national-id-section {
+                background: #f0f0f0 !important;
+                color: black !important;
+                box-shadow: none !important;
+            }
+            
+            .national-id-header h3 {
+                color: black !important;
+            }
+            
+            .national-id-icon {
+                background: #ddd !important;
+            }
+            
+            .national-id-icon i {
+                color: #333 !important;
+            }
+            
+            .national-id-number {
+                background: white !important;
+                color: black !important;
+                border: 1px solid #ccc !important;
+            }
+            
+            .number-card {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+            
+            .number-display {
+                font-size: 14pt;
+            }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .tax-benefit-container {
+                padding: 2rem 1.5rem;
+            }
+            
+            .numbers-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .number-display {
+                font-size: 1.5rem;
+            }
+            
+            .national-id-number {
+                font-size: 1.8rem;
+                padding: 1rem;
+            }
+            
+            .national-id-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .national-id-icon {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><a href="index.html">JAl R. Portfolio</a></h1>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="personal-info.html">Information</a></li>
+                    <li><a href="academic.html">Academic Background</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="skills.html">Skills</a></li>
+                    <li><a href="work-experience.html">Experience</a></li>
+                    <li><a href="certificates.html">Certificates</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="tax-benefit-section">
+        <div class="container">
+            <div class="tax-benefit-container">
+                <div class="tax-benefit-header">
+                    <h2>Tax & Benefit Information</h2>
+                    <p>Official identification numbers for employment and benefits</p>
+                </div>
+                
+                <!-- National ID Section -->
+                <div class="national-id-section">
+                    <div class="national-id-header">
+                        <div class="national-id-icon">
+                            <i class="fas fa-id-card-alt"></i>
+                        </div>
+                        <h3>Philippine National ID</h3>
+                    </div>
+                    <div class="national-id-number">
+                        1234-5678-9012-3456
+                    </div>
+                </div>
+                
+                <div class="numbers-grid">
+                    <div class="number-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-id-card"></i>
+                            </div>
+                            <h3>SSS Number</h3>
+                        </div>
+                        <div class="number-display">
+                            34-4567890-2
+                        </div>
+                    </div>
+                    
+                    <div class="number-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-heartbeat"></i>
+                            </div>
+                            <h3>PhilHealth Number</h3>
+                        </div>
+                        <div class="number-display">
+                            12-345678901-2
+                        </div>
+                    </div>
+                    
+                    <div class="number-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <h3>Pag-IBIG Number</h3>
+                        </div>
+                        <div class="number-display">
+                            1234-5678-9012
+                        </div>
+                    </div>
+                    
+                    <div class="number-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-file-invoice-dollar"></i>
+                            </div>
+                            <h3>Tax Identification No.</h3>
+                        </div>
+                        <div class="number-display">
+                            123-456-789-000
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="print-section">
+                    <button class="print-btn" onclick="window.print()">
+                        <i class="fas fa-print"></i> Print / Save as PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mobile-nav-buttons">
+            <a href="personal-info.html" class="mobile-nav-btn">
+                <i class="fas fa-arrow-left"></i> Previous
+            </a>
+            <a href="academic.html" class="mobile-nav-btn">
+                Next <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 <strong>John Albert Retiza</strong>. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Hamburger menu toggle
+            const menuToggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('nav');
+            
+            menuToggle.addEventListener('click', function() {
+                nav.classList.toggle('active');
+                menuToggle.classList.toggle('active');
+            });
+
+            // Close menu when clicking on a link
+            const navLinks = document.querySelectorAll('nav ul li a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    nav.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
