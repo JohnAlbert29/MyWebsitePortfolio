@@ -1,95 +1,3143 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="/index.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-  </head>
-  <body>
-     <header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Albert Retiza | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* ============================================= */
+        /* 1. GLOBAL VARIABLES & BASE STYLES */
+        /* ============================================= */
+
+        :root {
+          --primary-color: #1a237e; /* Deep Blue */
+          --secondary-color: Gold; /* Gold */
+          --accent-color: #455a64; /* Slate Gray */
+          --light-color: #f5f5f5;
+          --dark-color: #212121;
+          --text-color: #333333;
+          --white: #ffffff;
+        }
+
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        body {
+          font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+          line-height: 1.6;
+          color: var(--text-color);
+          background-color: var(--light-color);
+          padding: 0;
+          scroll-behavior: smooth;
+        }
+
+        .container {
+          width: 90%;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 20px;
+        }
+
+        /* ============================================= */
+        /* 2. TYPOGRAPHY & TEXT ELEMENTS */
+        /* ============================================= */
+
+        h1, h2, h3, h4 {
+          margin-bottom: 1rem;
+          font-weight: 600;
+          color: var(--primary-color);
+        }
+
+        h1 { font-size: 2.25rem; }
+        h2 { font-size: 1.8rem; }
+        h3 { font-size: 1.5rem; }
+        h4 { font-size: 1.2rem; }
+
+        p {
+          margin-bottom: 1rem;
+        }
+
+        a {
+          text-decoration: none;
+          color: inherit;
+        }
+
+        /* ============================================= */
+        /* 3. BUTTONS & INTERACTIVE ELEMENTS */
+        /* ============================================= */
+
+        .btn {
+          display: inline-block;
+          background: var(--secondary-color);
+          color: var(--dark-color);
+          padding: 12px 25px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-weight: 600;
+          transition: all 0.3s ease;
+          text-align: center;
+        }
+
+        .btn:hover {
+          background: #e6c200;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* CV Download Buttons */
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .download-btn:hover {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .download-btn i {
+            font-size: 0.8rem;
+        }
+
+        .download-btn.view-btn {
+            background: var(--accent-color);
+        }
+
+        .download-btn.view-btn:hover {
+            background: #5d7988;
+            color: white;
+        }
+
+        /* ============================================= */
+        /* 4. HEADER & NAVIGATION */
+        /* ============================================= */
+
+        header {
+          background: var(--primary-color);
+          color: var(--white);
+          padding: 1.5rem 0;
+          position: sticky;
+          top: 0;
+          z-index: 100;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header .container {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0 20px;
+          position: relative;
+        }
+
+        header h1 {
+          font-size: 1.8rem;
+          margin: 0;
+          color: var(--white);
+        }
+
+        /* Navigation */
+        nav ul {
+          list-style: none; 
+          display: flex;
+          gap: 1.5rem;
+        }
+
+        nav ul li a {
+          padding: 0.5rem 0;
+          position: relative;
+          transition: color 0.3s ease;
+          color: var(--white);
+          font-weight: 500;
+        }
+
+        nav ul li a:hover {
+          color: var(--secondary-color);
+        }
+
+        nav ul li a.active {
+          color: var(--secondary-color);
+        }
+
+        nav ul li a.active:after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background: var(--secondary-color);
+        }
+
+        /* Hamburger Menu */
+        .menu-toggle {
+          display: none;
+          cursor: pointer;
+          padding: 10px;
+          z-index: 101;
+        }
+
+        .menu-toggle i {
+          font-size: 1.5rem;
+          color: var(--white);
+        }
+
+        /* ============================================= */
+        /* 5. HERO SECTION */
+        /* ============================================= */
+
+        .hero {
+          background: linear-gradient(rgba(26, 35, 126, 0.8), rgba(26, 35, 126, 0.9)),
+            url("https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
+          background-size: cover;
+          background-position: center;
+          color: var(--white);
+          text-align: center;
+          padding: 8rem 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .hero .container {
+          padding: 40px 20px;
+        }
+
+        .hero h2 {
+          font-size: 2.5rem;
+          margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+          font-size: 1.2rem;
+          max-width: 700px;
+          margin: 0 auto 2rem;
+        }
+
+        /* ============================================= */
+        /* 6. PERSONAL INFO SECTION */
+        /* ============================================= */
+
+        .personal-info {
+          padding: 4rem 0;
+          text-align: center;
+        }
+
+        .profile-section {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-bottom: 3rem;
+          background: var(--white);
+          padding: 2.5rem;
+          border-radius: 8px;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          max-width: 900px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .profile-image {
+          width: 180px;
+          height: 180px;
+          border-radius: 50%;
+          overflow: hidden;
+          margin-bottom: 1.5rem;
+          border: 5px solid var(--secondary-color);
+          position: relative;
+          cursor: pointer;
+          transition: transform 0.3s ease;
+        }
+
+        .profile-image:hover {
+          transform: scale(1.05);
+        }
+
+        .profile-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .profile-details h2 {
+          font-size: 2rem;
+          color: var(--primary-color);
+          margin-bottom: 0.5rem;
+        }
+
+        .profile-details h3 {
+          font-size: 1.2rem;
+          color: var(--accent-color);
+          margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+          display: flex;
+          justify-content: center;
+          gap: 1rem;
+          margin-bottom: 1.5rem;
+        }
+
+        .social-links a {
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+          width: 40px;
+          height: 40px;
+          background: var(--primary-color);
+          color: var(--white);
+          border-radius: 50%;
+          transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+          background: var(--secondary-color);
+          color: var(--dark-color);
+          transform: translateY(-3px);
+        }
+
+        .social-links i {
+          font-size: 1.2rem;
+        }
+
+        .basic-info {
+          background: var(--white);
+          padding: 2.5rem;
+          border-radius: 8px;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          max-width: 900px;
+          margin: 0 auto;
+        }
+
+        .basic-info h3 {
+          color: var(--primary-color);
+          font-size: 1.5rem;
+          margin-bottom: 1.5rem;
+          padding-bottom: 0.5rem;
+          border-bottom: 2px solid var(--secondary-color);
+          text-align: center;
+        }
+
+        .info-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 1.5rem;
+          justify-items: center;
+        }
+
+        .info-item {
+          display: flex;
+          flex-direction: column;
+          text-align: center;
+          width: 100%;
+          max-width: 300px;
+          padding: 1rem;
+        }
+
+        .info-label {
+          font-weight: 600;
+          color: var(--accent-color);
+          margin-bottom: 0.5rem;
+        }
+
+        /* ============================================= */
+        /* 7. ACADEMIC BACKGROUND SECTION */
+        /* ============================================= */
+
+        .academic-background {
+          padding: 4rem 0;
+          text-align: center;
+        }
+
+        .academic-background .container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 3rem;
+          max-width: 1100px;
+        }
+
+        /* Education Item Cards */
+        .education-item {
+          background: var(--white);
+          border-radius: 16px;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+          margin-bottom: 2.5rem;
+          overflow: hidden;
+          max-width: 800px;
+          width: 100%;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .education-item:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Education Image */
+        .edu-image {
+          width: 100%;
+          height: 400px;
+          background-color: #e0e0e0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-top-left-radius: 16px;
+          border-top-right-radius: 16px;
+        }
+
+        .edu-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        /* Education Details */
+        .edu-details {
+          padding: 2rem;
+          text-align: center;
+          width: 100%;
+        }
+
+        .edu-details h3 {
+          font-size: 1.8rem;
+          margin-bottom: 0.5rem;
+        }
+
+        .degree {
+          font-size: 1.2rem;
+          font-weight: 600;
+          color: var(--accent-color);
+          margin-bottom: 0.25rem;
+        }
+
+        .duration {
+          font-style: italic;
+          color: var(--dark-color);
+          font-size: 0.95rem;
+          margin-bottom: 2rem;
+          display: block;
+        }
+
+        /* ============================================= */
+        /* 8. HONORS & AWARDS SECTION - PROFESSIONAL */
+        /* ============================================= */
+
+        .honors {
+          width: 100%;
+          background: linear-gradient(to bottom, #fffdf6, #fdf8e3);
+          padding: 2rem;
+          border-left: 5px solid var(--secondary-color);
+          border-radius: 12px;
+          margin-top: 2rem;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .honors h3 {
+          color: var(--primary-color);
+          font-size: 1.5rem;
+          margin-bottom: 1.5rem;
+          text-align: center;
+          position: relative;
+          padding-bottom: 0.5rem;
+        }
+
+        .honors h3:after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 60px;
+          height: 3px;
+          background: var(--secondary-color);
+          border-radius: 3px;
+        }
+
+        /* Awards Grid Layout */
+        .awards-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          gap: 1.2rem;
+          margin-top: 1.5rem;
+        }
+
+        .award-item {
+          background: white;
+          padding: 1.2rem 1.5rem;
+          border-radius: 8px;
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+          border-top: 3px solid rgba(218, 165, 32, 0.3);
+          transition: all 0.3s ease;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .award-item:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+          border-top-color: var(--secondary-color);
+        }
+
+        .award-item:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(135deg, rgba(26, 35, 126, 0.03) 0%, rgba(255, 215, 0, 0.03) 100%);
+          z-index: 0;
+        }
+
+        .award-content {
+          position: relative;
+          z-index: 1;
+        }
+
+        .award-title {
+          font-weight: 600;
+          color: var(--primary-color);
+          margin-bottom: 0.3rem;
+          font-size: 1.05rem;
+        }
+
+        .award-description {
+          color: var(--accent-color);
+          font-size: 0.9rem;
+          line-height: 1.5;
+        }
+
+        .award-year {
+          display: inline-block;
+          background: rgba(69, 90, 100, 0.1);
+          color: var(--accent-color);
+          padding: 0.2rem 0.6rem;
+          border-radius: 12px;
+          font-size: 0.8rem;
+          margin-top: 0.5rem;
+          font-weight: 500;
+        }
+
+        /* ============================================= */
+        /* 9. PROJECTS SECTION */
+        /* ============================================= */
+
+        .projects-section {
+          padding: 4rem 0;
+          background-color: #f9f9f9;
+        }
+
+        .project-item {
+          background: var(--white);
+          border-radius: 12px;
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+          padding: 1.5rem;
+          margin-bottom: 2rem;
+          transition: transform 0.3s ease;
+        }
+
+        .project-item:hover {
+          transform: translateY(-5px);
+        }
+
+        .project-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 1rem;
+          flex-wrap: wrap;
+        }
+
+        .project-type {
+          background: var(--secondary-color);
+          color: var(--dark-color);
+          padding: 0.5rem 1rem;
+          border-radius: 20px;
+          font-weight: 600;
+          font-size: 0.9rem;
+          margin-top: 0.5rem;
+        }
+
+        .project-description {
+          margin-bottom: 1.5rem;
+          color: var(--text-color);
+          font-size: 1rem;
+        }
+
+        .project-tech {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.8rem;
+          margin: 1.5rem 0;
+        }
+
+        .project-tech span {
+          background: var(--primary-color);
+          color: white;
+          padding: 0.5rem 1rem;
+          border-radius: 5px;
+          font-size: 0.9rem;
+          font-weight: 500;
+        }
+
+        /* Enhanced Slider */
+        .project-slider {
+          position: relative;
+          max-width: 100%;
+          margin: 1.5rem auto;
+          overflow: hidden;
+          border-radius: 8px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .slides {
+          display: flex;
+          transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          height: 450px;
+        }
+
+        .slide {
+          min-width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .slider-btn {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          background: deepskyblue;
+          backdrop-filter: blur(5px);
+          color: var(--white);
+          border: none;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          cursor: pointer;
+          z-index: 10;
+          font-size: 1.2rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s ease;
+          opacity: 0.8;
+        }
+
+        .slider-btn:hover {
+          background: var(--primary-color);
+          opacity: 1;
+          transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider-btn.prev {
+          left: 1rem;
+        }
+
+        .slider-btn.next {
+          right: 1rem;
+        }
+
+        .slider-dots {
+          position: absolute;
+          bottom: 1rem;
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          gap: 0.5rem;
+          z-index: 10;
+        }
+
+        .slider-dot {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: var(--primary-color);
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .slider-dot.active {
+          background: var(--secondary-color);
+          transform: scale(1.2);
+        }
+
+        /* Thesis Info Section */
+        .thesis-info h4 {
+          color: var(--primary-color);
+          margin-bottom: 0.8rem;
+        }
+
+        /* Business List - Modified to remove bullets */
+        .business-list {
+          margin: 1rem 0;
+        }
+        .business-item {
+          display: flex;
+          align-items: center;
+          margin-bottom: 0.8rem;
+          padding: 0.8rem;
+          background: rgba(255, 215, 0, 0.1);
+          border-radius: 8px;
+          transition: all 0.3s ease;
+        }
+        .business-item:hover {
+          background: rgba(255, 215, 0, 0.2);
+          transform: translateX(5px);
+        }
+        .business-item i {
+          color: var(--dark-color);
+          margin-right: 0.5rem;
+          width: 20px;
+          text-align: center;
+        }
+
+        /* ============================================= */
+        /* 10. SKILLS SECTION */
+        /* ============================================= */
+
+        .skills-services {
+          padding: 5rem 0;
+          background-color: var(--light-color);
+        }
+
+        .skills-header {
+          text-align: center;
+          margin-bottom: 4rem;
+        }
+
+        .skills-header h2 {
+          font-size: 2.8rem;
+          color: var(--primary-color);
+          margin-bottom: 1.5rem;
+          position: relative;
+          display: inline-block;
+        }
+
+        .skills-header h2::after {
+          content: '';
+          position: absolute;
+          bottom: -10px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 80px;
+          height: 3px;
+          background: var(--secondary-color);
+        }
+
+        .skills-header p {
+          max-width: 700px;
+          margin: 0 auto;
+          color: var(--accent-color);
+          font-size: 1.1rem;
+        }
+
+        /* Skill Category Cards - Enhanced */
+        .skill-category-card {
+          background: var(--white);
+          border-radius: 12px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+          padding: 2.5rem;
+          margin-bottom: 3rem;
+          transition: all 0.3s ease;
+          border-left: 5px solid var(--secondary-color);
+        }
+
+        .skill-category-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .skill-category-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 1.5rem;
+          padding-bottom: 1.5rem;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-category-title {
+          font-size: 1.8rem;
+          color: var(--primary-color);
+        }
+
+        .skill-category-icon {
+          font-size: 2.5rem;
+          color: var(--secondary-color);
+        }
+
+        .skill-category-content {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 2rem;
+        }
+
+        .skill-category-image {
+          flex: 1;
+          min-width: 300px;
+          border-radius: 8px;
+          overflow: hidden;
+          height: 300px;
+        }
+
+        .skill-category-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.5s ease;
+        }
+
+        .skill-category-image:hover img {
+          transform: scale(1.05);
+        }
+
+        .skill-category-details {
+          flex: 2;
+          min-width: 300px;
+        }
+
+        /* Enhanced Skill Badges */
+        .skill-badges {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.8rem;
+          margin: 1.5rem 0;
+        }
+
+        .skill-badge {
+          background: rgba(26, 35, 126, 0.1);
+          color: var(--primary-color);
+          padding: 0.6rem 1.2rem;
+          border-radius: 20px;
+          font-size: 0.9rem;
+          font-weight: 600;
+          transition: all 0.3s ease;
+          display: inline-flex;
+          align-items: center;
+          border: 1px solid rgba(26, 35, 126, 0.15);
+          white-space: nowrap; /* Prevent text wrapping */
+        }
+
+        .skill-badge i {
+          margin-right: 0.5rem;
+          font-size: 0.9em;
+        }
+
+        .skill-badge:hover {
+          background: var(--primary-color);
+          color: var(--white);
+          transform: translateY(-3px);
+          box-shadow: 0 4px 12px rgba(26, 35, 126, 0.2);
+        }
+
+        .skill-description {
+          margin-bottom: 1.5rem;
+          color: var(--text-color);
+          line-height: 1.7;
+          font-size: 1.05rem;
+        }
+
+        /* Services Section */
+        .services-section {
+          margin-top: 4rem;
+        }
+
+        .services-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 2rem;
+          margin-top: 2rem;
+        }
+
+        .service-item {
+          background: var(--white);
+          border-radius: 12px;
+          padding: 2rem;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+          transition: all 0.3s ease;
+          text-align: center;
+          border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .service-item:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-item i {
+          font-size: 2.5rem;
+          color: var(--secondary-color);
+          margin-bottom: 1.5rem;
+          display: block;
+          transition: transform 0.3s ease;
+        }
+
+        .service-item:hover i {
+          transform: scale(1.1);
+        }
+
+        .service-item h4 {
+          font-size: 1.3rem;
+          margin-bottom: 1rem;
+          color: var(--primary-color);
+        }
+
+        .service-item p {
+          color: var(--text-color);
+          line-height: 1.6;
+        }
+
+        /* ============================================= */
+        /* 11. EXPERIENCE SECTION */
+        /* ============================================= */
+
+        .experience-section {
+          padding: 4rem 0;
+          background-color: #f9f9f9;
+        }
+
+        .section-header {
+          text-align: center;
+          margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+          font-size: 2.5rem;
+          color: var(--primary-color);
+          margin-bottom: 1rem;
+        }
+
+        .section-header p {
+          max-width: 700px;
+          margin: 0 auto;
+          color: var(--accent-color);
+        }
+
+        /* Summary Card */
+        .summary-card {
+          background: var(--white);
+          border-radius: 12px;
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+          padding: 2.5rem;
+          margin-bottom: 3rem;
+          transition: transform 0.3s ease;
+        }
+
+        .summary-card:hover {
+          transform: translateY(-5px);
+        }
+
+        .summary-header {
+          display: flex;
+          align-items: center;
+          margin-bottom: 1.5rem;
+        }
+
+        .summary-header i {
+          font-size: 2rem;
+          color: var(--secondary-color);
+          margin-right: 1rem;
+        }
+
+        .summary-header h3 {
+          font-size: 1.8rem;
+          color: var(--primary-color);
+        }
+
+        .summary-content p {
+          margin-bottom: 1rem;
+          line-height: 1.7;
+          color: var(--text-color);
+        }
+
+        /* Timeline */
+        .timeline {
+          position: relative;
+          padding-left: 50px;
+          margin-bottom: 3rem;
+        }
+
+        .timeline:before {
+          content: "";
+          position: absolute;
+          left: 20px;
+          top: 0;
+          bottom: 0;
+          width: 4px;
+          background: var(--secondary-color);
+        }
+
+        .timeline-item {
+          position: relative;
+          margin-bottom: 2.5rem;
+        }
+
+        .timeline-date {
+          position: absolute;
+          left: -50px;
+          width: 120px;
+          padding: 0.5rem;
+          text-align: center;
+          background: var(--secondary-color);
+          color: var(--dark-color);
+          font-weight: 600;
+          border-radius: 20px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-content {
+          background: var(--white);
+          border-radius: 12px;
+          padding: 2rem;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+          transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .timeline-content h3 {
+          font-size: 1.5rem;
+          color: var(--primary-color);
+          margin-bottom: 0.5rem;
+        }
+
+        .timeline-content h4 {
+          font-size: 1.1rem;
+          color: var(--accent-color);
+          margin-bottom: 1.5rem;
+          font-weight: 500;
+        }
+
+        .responsibilities {
+          list-style: none;
+        }
+
+        .responsibilities li {
+          margin-bottom: 0.8rem;
+          padding-left: 1.5rem;
+          position: relative;
+          color: var(--text-color);
+        }
+
+        .responsibilities i {
+          position: absolute;
+          left: 0;
+          color: var(--secondary-color);
+        }
+
+        /* ============================================= */
+        /* 12. REFERENCES SECTION */
+        /* ============================================= */
+
+        .references-section {
+          padding: 2rem 0 4rem;
+        }
+
+        .references-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+          gap: 2rem;
+          margin-top: 2rem;
+        }
+
+        .reference-card {
+          background: var(--white);
+          border-radius: 12px;
+          padding: 2rem;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+          transition: all 0.3s ease;
+        }
+
+        .reference-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .reference-header {
+          display: flex;
+          align-items: center;
+          margin-bottom: 1.5rem;
+          padding-bottom: 1rem;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .reference-header i {
+          font-size: 2rem;
+          color: var(--primary-color);
+          margin-right: 1rem;
+        }
+
+        .reference-header h3 {
+          font-size: 1.5rem;
+          color: var(--primary-color);
+          margin: 0;
+        }
+
+        .reference-detail {
+          display: flex;
+          align-items: center;
+          margin-bottom: 1rem;
+        }
+
+        .reference-detail i {
+          width: 24px;
+          color: var(--secondary-color);
+          margin-right: 1rem;
+          text-align: center;
+        }
+
+        /* ============================================= */
+        /* 13. CERTIFICATES SECTION */
+        /* ============================================= */
+
+        .certificates-section {
+          padding: 3rem 0;
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+
+        .certificates-section h1 {
+          font-size: 2.5rem;
+          margin-bottom: 2rem;
+          position: relative;
+          padding-bottom: 1rem;
+          font-weight: 700;
+          color: var(--primary-color);
+          text-align: center;
+          letter-spacing: -0.5px;
+        }
+
+        .certificates-section h1::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 120px;
+          height: 4px;
+          background: var(--secondary-color);
+          border-radius: 2px;
+        }
+
+        .section-description {
+          font-size: 1.2rem;
+          color: var(--accent-color);
+          margin-bottom: 3rem;
+          text-align: center;
+          max-width: 800px;
+          margin-left: auto;
+          margin-right: auto;
+          line-height: 1.8;
+        }
+
+        /* Certificate List */
+        .certificates-list {
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+          margin-bottom: 4rem;
+        }
+
+        /* Certificate Item - Professional Card */
+        .certificate-item {
+          background: var(--white);
+          border: 1px solid rgba(0, 0, 0, 0.08);
+          border-radius: 12px;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+          transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+          padding: 2.5rem;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .certificate-item::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 5px;
+          height: 100%;
+          background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+        }
+
+        .certificate-item:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+          border-color: rgba(26, 35, 126, 0.2);
+        }
+
+        /* Certificate Header */
+        .certificate-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          margin-bottom: 1.5rem;
+          position: relative;
+        }
+
+        .certificate-details h3 {
+          color: var(--primary-color);
+          font-size: 1.6rem;
+          font-weight: 700;
+          margin-bottom: 1rem;
+          line-height: 1.4;
+          padding-right: 2rem;
+          position: relative;
+        }
+
+        .certificate-details h3::after {
+          content: "";
+          position: absolute;
+          bottom: -8px;
+          left: 0;
+          width: 50px;
+          height: 3px;
+          background: var(--secondary-color);
+          border-radius: 3px;
+        }
+
+        /* View Certificate Button - Professional Style */
+        .view-certificate-btn {
+          background-color: var(--primary-color);
+          color: var(--white);
+          padding: 10px 20px;
+          border-radius: 6px;
+          border: none;
+          cursor: pointer;
+          font-size: 0.95rem;
+          font-weight: 600;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          transition: all 0.3s ease;
+          position: absolute;
+          top: 1.5rem;
+          right: 1.5rem;
+          box-shadow: 0 3px 10px rgba(26, 35, 126, 0.2);
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+
+        .view-certificate-btn:hover {
+          background-color: var(--secondary-color);
+          color: var(--primary-color);
+          transform: translateY(-3px);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .view-certificate-btn i {
+          font-size: 1.1rem;
+          transition: transform 0.3s ease;
+        }
+
+        .view-certificate-btn:hover i {
+          transform: translateX(3px);
+        }
+
+        /* Certificate Meta Information - Enhanced */
+        .certificate-meta {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 2rem;
+          margin-bottom: 1.5rem;
+        }
+
+        .issuing-org {
+          font-size: 1.05rem;
+          color: var(--accent-color);
+          display: flex;
+          align-items: center;
+          gap: 0.7rem;
+          font-weight: 500;
+        }
+
+        .issuing-org::before {
+          content: "🏛️";
+          font-size: 1.1rem;
+        }
+
+        .date-earned {
+          font-size: 1.05rem;
+          color: var(--accent-color);
+          display: flex;
+          align-items: center;
+          gap: 0.7rem;
+          font-weight: 500;
+        }
+
+        .date-earned::before {
+          content: "📅";
+          font-size: 1.1rem;
+        }
+
+        /* Description - Professional Style */
+        .certificate-description {
+          margin: 1.5rem 0;
+          color: var(--text-color);
+          line-height: 1.8;
+          font-size: 1.05rem;
+          padding-left: 1rem;
+          border-left: 3px solid var(--light-color);
+        }
+
+        /* Skills Section - Enhanced */
+        .skills-gained h4 {
+          color: var(--primary-color);
+          font-size: 1.2rem;
+          margin-bottom: 1rem;
+          display: flex;
+          align-items: center;
+          gap: 0.7rem;
+          font-weight: 600;
+        }
+
+        .skills-gained h4::before {
+          content: "🛠️";
+          font-size: 1.1rem;
+        }
+
+        .skills-badges {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 1rem;
+          margin-bottom: 1rem;
+        }
+
+        .skills-badges span {
+          background: linear-gradient(135deg, var(--primary-color), #3949ab);
+          color: var(--white);
+          padding: 0.6rem 1.2rem;
+          font-size: 0.9rem;
+          border-radius: 6px;
+          font-weight: 500;
+          transition: all 0.3s ease;
+          box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+          display: flex;
+          align-items: center;
+        }
+
+        .skills-badges span::before {
+          content: "✓";
+          margin-right: 0.5rem;
+          font-size: 0.8rem;
+        }
+
+        .skills-badges span:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Certificate Status Ribbon */
+        .certificate-status {
+          position: absolute;
+          top: 20px;
+          right: -40px;
+          background: var(--secondary-color);
+          color: var(--primary-color);
+          padding: 0.3rem 2.5rem;
+          transform: rotate(45deg);
+          font-size: 0.8rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Certificate Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            border: 5px solid var(--secondary-color);
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: var(--white);
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--secondary-color);
+        }
+
+        /* ============================================= */
+        /* 14. FOOTER */
+        /* ============================================= */
+
+        footer {
+          background: var(--primary-color);
+          color: var(--white);
+          text-align: center;
+          padding: 2rem 0;
+          margin-top: 3rem;
+        }
+
+        footer .container {
+          padding: 0 20px;
+        }
+
+        /* ============================================= */
+        /* 15. RATING SLIP BUTTONS - PROFESSIONAL STYLE */
+        /* ============================================= */
+        .rating-slip-buttons {
+            display: flex;
+            gap: 9px;
+            margin-top: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .rating-slip-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-weight: 450;
+            font-size: 0.80rem;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            text-decoration: none;
+            border: 2px solid transparent;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            min-width: 140px;
+            text-align: center;
+        }
+
+        .rating-slip-button.view {
+            background-color: #1a237e;
+            color: gold;
+            border-color: #455a64;
+        }
+
+        .rating-slip-button.download {
+            background-color: #1a237e;
+            color: gold;
+            border-color: #455a64;
+        }
+
+        .rating-slip-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+
+        .rating-slip-button.view:hover {
+            background-color: #455a64;
+        }
+
+        .rating-slip-button.download:hover {
+            background-color: #455a64;
+        }
+
+        .rating-slip-button:active {
+            transform: translateY(1px);
+        }
+
+        .rating-slip-button i {
+            font-size: 0.9em;
+        }
+
+        /* Focus states for accessibility */
+        .rating-slip-button:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.4);
+        }
+
+        /* ============================================= */
+        /* 16. MOBILE RESPONSIVENESS */
+        /* ============================================= */
+
+        @media (max-width: 768px) {
+          /* Mobile Navigation */
+          .menu-toggle {
+            display: block;
+          }
+
+          nav {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            max-height: 0;
+            background: var(--primary-color);
+            transition: all 0.3s ease;
+            z-index: 100;
+            overflow: hidden;
+            padding: 0 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+          }
+
+          nav.active {
+            max-height: 500px;
+            padding: 1.5rem;
+          }
+
+          nav ul {
+            flex-direction: column;
+            gap: 1rem;
+          }
+
+          nav ul li a {
+            padding: 0.8rem;
+            display: block;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          }
+
+          /* Hero Section */
+          .hero {
+            padding: 6rem 0;
+          }
+
+          .hero h2 {
+            font-size: 2rem;
+          }
+
+          .hero p {
+            font-size: 1rem;
+          }
+
+          /* Education Items */
+          .edu-image {
+            height: 250px;
+          }
+
+          .edu-details {
+            padding: 1.5rem;
+          }
+
+          /* Project Sliders */
+          .project-slider {
+            height: 250px;
+          }
+
+          .slides {
+            height: 250px;
+          }
+
+          .slider-btn {
+            width: 35px;
+            height: 35px;
+            font-size: 1rem;
+          }
+
+          /* Skill Categories */
+          .skill-category-content {
+            flex-direction: column;
+          }
+
+          .skill-category-image {
+            min-width: 100%;
+            height: 200px;
+          }
+
+          .skill-category-details {
+            min-width: 100%;
+          }
+
+          /* Services Grid */
+          .services-grid {
+            grid-template-columns: 1fr;
+          }
+
+          /* Timeline */
+          .timeline {
+            padding-left: 30px;
+          }
+
+          .timeline-date {
+            left: -30px;
+            width: 100px;
+            font-size: 0.8rem;
+          }
+
+          /* References Grid */
+          .references-grid {
+            grid-template-columns: 1fr;
+          }
+
+          /* Rating Slip Buttons */
+          .rating-slip-buttons {
+            flex-direction: column;
+            gap: 8px;
+          }
+
+          .rating-slip-button {
+            width: 100%;
+          }
+        }
+
+        @media (max-width: 480px) {
+          /* Extra Small Devices */
+          body {
+            font-size: 14px;
+          }
+
+          .hero {
+            padding: 4rem 0;
+          }
+
+          .hero h2 {
+            font-size: 1.8rem;
+          }
+
+          .profile-details h2 {
+            font-size: 1.5rem;
+          }
+
+          .profile-details h3 {
+            font-size: 1rem;
+          }
+
+          .edu-image {
+            height: 150px;
+          }
+
+          .edu-details {
+            padding: 1.2rem;
+          }
+
+          .honors {
+            padding: 0.8rem;
+          }
+
+          .project-slider {
+            height: 200px;
+          }
+
+          .slides {
+            height: 200px;
+          }
+
+          .project-item {
+            padding: 1.2rem;
+          }
+
+          .project-header h2 {
+            font-size: 1.3rem;
+          }
+
+          .project-header h3 {
+            font-size: 1.1rem;
+          }
+
+          .project-tech span {
+            padding: 0.4rem 0.4rem;
+            font-size: 0.8rem;
+          }
+
+          .skill-badges {
+            gap: 0.5rem;
+          }
+
+          .skill-badge {
+            font-size: 0.8rem;
+            padding: 0.5rem 1rem;
+          }
+
+          .skill-category-card {
+            padding: 1.5rem;
+          }
+
+          .skill-category-image {
+            height: 150px;
+          }
+
+          .timeline-content {
+            padding: 1.5rem;
+          }
+
+          .certificate-item {
+            padding: 1.5rem;
+          }
+
+          .certificate-details h3 {
+            font-size: 1.4rem;
+            padding-right: 0;
+          }
+
+          .certificate-meta {
+            flex-direction: column;
+            gap: 1rem;
+          }
+
+          .view-certificate-btn {
+            position: static;
+            margin-top: 1.5rem;
+            width: 100%;
+            justify-content: center;
+          }
+
+          .certificate-header {
+            flex-direction: column;
+          }
+        }
+    </style>
+</head>
+<body>
+    <header>
         <div class="container">
-            <h1><a href="index.html">JAl R. Portfolio</a></h1>
+            <h1><a href="#home">JAl R. Portfolio</a></h1>
             <div class="menu-toggle">
                 <i class="fas fa-bars"></i>
             </div>
             <nav>
                 <ul>
-                    <li><a href="personal-info.html">Information</a></li>
-                    <li><a href="academic.html">Academic Background</a></li>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="skills.html">Skills</a></li>
-                    <li><a href="work-experience.html">Experience</a></li>
-                    <li><a href="certificates.html">Certificates</a></li>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#personal-info">Information</a></li>
+                    <li><a href="#academic">Academic</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#certificates">Certificates</a></li>
                 </ul>
             </nav>
         </div>
     </header>
-    <section class="hero">
-      <div class="container">
-        <h2>Welcome to My Portfolio</h2>
-          <p>
-            I am John Albert J Retiza and i will try +to create an Innovative
-            solutions through Vibe Coding and with the power of AI.
-          </p>
-          <div class="cta-buttons">
-            <a href="personal-info.html" target="_self" class="btn"
-              >View My Profile</a
-             >
-          <a href="projects.html" target="_blank" class="btn btn-outline"
-              >See My Work</a>
-          </div>
-      </div>
-    </section>
-    <footer>
-      <div class="container">
-        <div class="footer-row">
-          <div class="contact-horizontal">
-            <div class="contact-item">
-                <i class="fas fa-envelope"></i>
-              <span>retiza.icta@gmail.com</span>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h2>Welcome to My Portfolio</h2>
+            <p>
+                I am John Albert J Retiza and I will try to create innovative
+                solutions through Vibe Coding and with the power of AI.
+            </p>
+            <div class="cta-buttons">
+                <a href="#personal-info" class="btn">View My Profile</a>
+                <a href="#projects" class="btn btn-outline">See My Work</a>
             </div>
-              <div class="contact-item">
-                <i class="fas fa-phone"></i>
-                <span>+63 936 464 3250</span>
-            </div>
-            <div class="contact-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>Caloocan City, Philippines</span>
-            </div>
-          </div>
-          <div class="copyright">
-          <p>&copy; 2025 <strong>John Albert Retiza</strong>. All rights reserved.</p>
-          </div>
         </div>
-      </div>
+    </section>
+
+    <!-- Personal Information Section -->
+    <section id="personal-info" class="personal-info">
+        <div class="container">
+            <div class="profile-section">
+                <div class="profile-image">
+                    <img src="images/Jal.jpg" alt="Profile Picture">
+                </div>
+                <div class="profile-details">
+                    <h2>John Albert Retiza</h2>
+                    <h3>Bachelor of Science in Information System</h3>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/kathua.retiza" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://github.com/JohnAlbert29" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/john-albert-retiza-9209642b7/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                    <a href="images/CV Final Enhancement.pdf" class="download-btn" download="JohnAlbertRetizaCurriculumVitae.pdf">
+                        <i class="fas fa-download"></i> Download CV
+                    </a>
+                    <a href="tax-benefit.html" class="download-btn" style="margin-left: 10px;">
+                        <i class="fas fa-file-invoice-dollar"></i> Tax & Benefit Info
+                    </a>
+                </div>
+            </div>
+
+            <div class="basic-info">
+                <h3>Basic Information</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Date of Birth:</span>
+                        <span class="info-value">June 29, 2002</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Address:</span>
+                        <span class="info-value">Maypajo, Caloocan City</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Email:</span>
+                        <span class="info-value">retiza.icta@gmail.com</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Phone:</span>
+                        <span class="info-value">09364643250</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Nationality:</span>
+                        <span class="info-value">Filipino</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Languages:</span>
+                        <span class="info-value">Tagalog, English</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Academic Background Section -->
+    <section id="academic" class="academic-background">
+        <div class="container">
+            <h1>Academic Background</h1>
+            
+            <div class="education-item college">
+                <div class="edu-image">
+                    <img src="images/collegee.jpg" alt="University">
+                </div>
+                <div class="edu-details">
+                    <h3>Technological University of the Philippines</h3>
+                    <p class="degree">Bachelor of Science in Information System</p>
+                    <p class="duration">SY: 2021 - 2025</p>
+                    <div class="honors">
+                        <h3>Graduated Cumlaude</h3>
+                        <div class="awards-grid">
+                            <div class="award-item">
+                                <div class="award-content">
+                                    <div class="award-title">President Lister</div>
+                                    <div class="award-description">Academic Excellence</div>
+                                    <div class="award-description">GWA 1.000</div>
+                                    <div class="award-year">4th Year 2nd Semester</div>
+                                    <div class="rating-slip-buttons">
+                                    <a href="images/Retiza S8.pdf" class="rating-slip-button view" target="_blank">
+                                        <i class="fas fa-search"></i> View Rating Slip
+                                    </a>
+                                    <a href="images/Retiza S8.pdf" class="rating-slip-button download" download="RatingSlip4th2nd.pdf">
+                                        <i class="fas fa-download"></i> Download Slip
+                                     </a>
+                                    </div>
+                                </div>
+                            </div>
+                           <div class="award-item">
+                                <div class="award-content">
+                                    <div class="award-title">Dean's Lister</div>
+                                    <div class="award-description">Academic Excellence</div>
+                                    <div class="award-description">GWA 1.708</div>
+                                    <div class="award-year">4th Year 1st Semester</div>
+                                    <div class="rating-slip-buttons">
+                                    <a href="images/Retiza S7.pdf" class="rating-slip-button view" target="_blank">
+                                        <i class="fas fa-search"></i> View Rating Slip
+                                    </a>
+                                    <a href="images/Retiza S7.pdf" class="rating-slip-button download" download="RatingSlip4th1st.pdf">
+                                        <i class="fas fa-download"></i> Download Slip
+                                     </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="award-item">
+                                <div class="award-content">
+                                    <div class="award-title">Dean's Lister</div>
+                                    <div class="award-description">Academic Excellence</div>
+                                    <div class="award-description">GWA 1.594</div>
+                                    <div class="award-year">3rd Year 2nd Semester</div>
+                                    <div class="rating-slip-buttons">
+                                    <a href="images/Retiza S6.pdf" class="rating-slip-button view" target="_blank">
+                                        <i class="fas fa-search"></i> View Rating Slip
+                                    </a>
+                                    <a href="images/Retiza S6.pdf" class="rating-slip-button download" download="RatingSlip3rd2nd.pdf">
+                                        <i class="fas fa-download"></i> Download Slip
+                                     </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="award-item">
+                                <div class="award-content">
+                                    <div class="award-title">President's Lister</div>
+                                    <div class="award-description">Top Academic Performance</div>
+                                    <div class="award-description">GWA 1.438</div>
+                                    <div class="award-year">3rd Year 1st Semester</div>
+                                    <div class="rating-slip-buttons">
+                                    <a href="images/Retiza S5.pdf" class="rating-slip-button view" target="_blank">
+                                        <i class="fas fa-search"></i> View Rating Slip
+                                    </a>
+                                    <a href="images/Retiza S5.pdf" class="rating-slip-button download" download="RatingSlip3rd1st.pdf">
+                                        <i class="fas fa-download"></i> Download Slip
+                                     </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="award-item">
+                                <div class="award-content">
+                                    <div class="award-title">Dean's Lister</div>
+                                    <div class="award-description">Academic Excellence</div>
+                                    <div class="award-description">GWA 1.739</div>
+                                    <div class="award-year">2nd Year 2nd Semester</div>
+                                    <div class="rating-slip-buttons">
+                                    <a href="images/Retiza S4.pdf" class="rating-slip-button view" target="_blank">
+                                        <i class="fas fa-search"></i> View Rating Slip
+                                    </a>
+                                    <a href="images/Retiza S4.pdf" class="rating-slip-button download" download="RatingSlip2nd2nd">
+                                        <i class="fas fa-download"></i> Download Slip
+                                     </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="award-item">
+                                <div class="award-content">
+                                    <div class="award-title">Dean's Lister</div>
+                                    <div class="award-description">Academic Excellence</div>
+                                    <div class="award-description">GWA 1.641</div>
+                                    <div class="award-year">2nd Year 1st Semester</div>
+                                    <div class="rating-slip-buttons">
+                                    <a href="images/Retiza S3.pdf" class="rating-slip-button view" target="_blank">
+                                        <i class="fas fa-search"></i> View Rating Slip
+                                    </a>
+                                    <a href="images/Retiza S3.pdf" class="rating-slip-button download" download="RatingSlip2nd1st">
+                                        <i class="fas fa-download"></i> Download Slip
+                                     </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="education-item shs">
+                <div class="edu-image">
+                    <img src="images/seniorhigh.jpg" alt="Senior High School">
+                </div>
+                <div class="edu-details">
+                    <h3>Florentino Senior High School (MTVES)</h3>
+                    <p class="degree">TVL-ICT Strand</p>
+                    <p class="duration">SY: 2017 - 2019</p>
+                    <div class="honors">
+                        <h3>Honors &amp; Awards</h3>
+                        <div class="awards-grid">
+                            <div class="award-item">
+                                <div class="award-content">
+                                    <div class="award-title">NCII Passer</div>
+                                    <div class="award-description">National Certification II</div>
+                                    <div class="award-year">Grade 12</div>
+                                </div>
+                            </div>
+                            <div class="award-item">
+                                <div class="award-content">
+                                    <div class="award-title">With Honors</div>
+                                    <div class="award-description">Academic Achievement</div>
+                                    <div class="award-year">Grade 12</div>
+                                </div>
+                            </div>
+                            <div class="award-item">
+                                <div class="award-content">
+                                    <div class="award-title">With Honors</div>
+                                    <div class="award-description">Academic Achievement</div>
+                                    <div class="award-year">Grade 11</div>
+                                </div>
+                            </div>
+                            <div class="award-item">
+                                <div class="award-content">
+                                    <div class="award-title">Cultural Cooking Contest</div>
+                                    <div class="award-description">2nd Place Winner</div>
+                                    <div class="award-year">2019</div>
+                                </div>
+                            </div>
+                            <div class="award-item">
+                                <div class="award-content">
+                                    <div class="award-title">Vlog Making Contest</div>
+                                    <div class="award-description">Champion</div>
+                                    <div class="award-year">2018</div>
+                                </div>
+                            </div>
+                            <div class="award-item">
+                                <div class="award-content">
+                                    <div class="award-title">Buwan ng Wika Pag Sayaw</div>
+                                    <div class="award-description">Champion</div>
+                                    <div class="award-year">2018</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="education-item hs">
+                <div class="edu-image">
+                    <img src="images/highschooll.jpg" alt="High School">
+                </div>
+                <div class="edu-details">
+                    <h3>Florentino Torres High School</h3>
+                    <p class="degree">Junior High School</p>
+                    <p class="duration">SY: 2014 - 2016</p>
+                    <div class="honors">
+                        <h3>Honors &amp; Awards</h3>
+                        <div class="awards-grid">
+                            <div class="award-item">
+                                <div class="award-content">
+                                    <div class="award-title">Library Club Member</div>
+                                    <div class="award-description">Active Participation</div>
+                                    <div class="award-year">2014-2016</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <h1 class="animate-in">My Projects</h1>
+            <p class="animate-in" style="max-width: 800px; margin-bottom: 2rem">
+                Here are some of my notable projects showcasing my skills in web
+                development, problem-solving, and innovative thinking.
+            </p>
+
+            <!-- Capstone Project -->
+            <div class="project-item animate-in">
+                <div class="project-header">
+                    <h2>Capstone Project</h2>
+                    <span class="project-type">Academic Thesis</span>
+                </div>
+                <h3>Talent Track: Digital Recruitment System</h3>
+                <p class="project-description">
+                    Talent Track is our Capstone Project developed by Christian Montero
+                    and myself. It revolutionizes Lazada's expediter hiring process by
+                    implementing automation and digital interaction, reducing hiring
+                    time by 40% and improving candidate experience.
+                </p>
+
+                <!-- Enhanced Slider -->
+                <div class="project-slider">
+                    <div class="slides">
+                        <img
+                            src="images/TalentFront.png"
+                            alt="Talent Track Dashboard"
+                            class="slide"
+                        />
+                        <img
+                            src="images/applicationform.png"
+                            alt="Application Form"
+                            class="slide"
+                        />
+                        <img
+                            src="images/applicationmanagement.png"
+                            alt="Application Management"
+                            class="slide"
+                        />
+                        <img
+                            src="images/applicationprogress.png"
+                            alt="Application Progress Tracking"
+                            class="slide"
+                        />
+                        <img
+                            src="images/adminpage.png"
+                            alt="Admin Dashboard"
+                            class="slide"
+                        />
+                    </div>
+                    <button class="slider-btn prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="slider-btn next">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="slider-dots"></div>
+                </div>
+
+                <div class="thesis-info">
+                    <h4>Thesis Abstract</h4>
+                    <p>
+                        This study aimed to develop a digital recruitment system to
+                        streamline Lazada's expediter hiring process. The system
+                        integrates automated CV screening, interview scheduling with
+                        calendar synchronization, digital testing modules, and real-time
+                        progress tracking.
+                    </p>
+                </div>
+
+                <h4>Key Features:</h4>
+                <div class="business-list">
+                    <div class="business-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>Website for Applicant</div>
+                    </div>
+                    <div class="business-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            CV submission & application tracking with real-time
+                            notifications
+                        </div>
+                    </div>
+                    <div class="business-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>Interview scheduling with Calendar API's</div>
+                    </div>
+                    <div class="business-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            Digital tutorials, online exams, and video interview
+                            capabilities
+                        </div>
+                    </div>
+                    <div class="business-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            Auto-generated reports and AI-powered candidate evaluations
+                        </div>
+                    </div>
+                </div>
+
+                <h4>Technologies Used:</h4>
+                <div class="project-tech">
+                    <span><i class="fab fa-css3-alt"></i> Tailwind CSS</span>
+                    <span><i class="fab fa-node-js"></i> Node.js</span>
+                    <span><i class="fab fa-react"></i> Next.js</span>
+                    <span><i class="fas fa-database"></i> PostgreSQL</span>
+                    <span><i class="fas fa-envelope"></i> Nodemailer</span>
+                    <span><i class="fab fa-react"></i> React Email</span>
+                </div>
+            </div>
+
+            <!-- E-Commerce Project -->
+            <div class="project-item animate-in" style="animation-delay: 0.2s">
+                <div class="project-header">
+                    <h2>Web Development Project</h2>
+                    <span class="project-type">Academic Project</span>
+                </div>
+                <h3>E-Commerce Platform for Quiapo Local Businesses</h3>
+                <p class="project-description">
+                    Developed as our final project in Website Development, this
+                    e-commerce platform supports three unique local businesses in
+                    Quiapo, Manila, helping them establish an online presence and reach
+                    more customers.
+                </p>
+
+                <!-- Enhanced Slider -->
+                <div class="project-slider">
+                    <div class="slides">
+                        <img
+                            src="/images/pr1a.jpg"
+                            alt="E-commerce Homepage"
+                            class="slide"
+                        />
+                        <img
+                            src="/images/pr1b.jpg"
+                            alt="Product Shop Page"
+                            class="slide"
+                        />
+                        <img
+                            src="/images/pr1c.jpg"
+                            alt="User Account Dashboard"
+                            class="slide"
+                        />
+                        <img
+                            src="/images/pr1d.jpg"
+                            alt="Product Detail Page"
+                            class="slide"
+                        />
+                        <img
+                            src="/images/pr1e.jpg"
+                            alt="Checkout Process"
+                            class="slide"
+                        />
+                    </div>
+                    <button class="slider-btn prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="slider-btn next">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="slider-dots"></div>
+                </div>
+
+                <div class="thesis-info">
+                    <h4>Project Overview</h4>
+                    <p>
+                        This platform was designed to help traditional brick-and-mortar
+                        stores in Quiapo transition to digital commerce. The system
+                        features inventory management, secure payment processing, and a
+                        unified storefront for three distinct businesses while maintaining
+                        their individual brand identities.
+                    </p>
+                </div>
+
+                <h4>Businesses Served:</h4>
+                <div class="business-list">
+                    <div class="business-item">
+                        <i class="fas fa-store"></i>
+                        <div>
+                            <strong>The Powerhouse</strong> - Electronics and gadgets
+                            retailer with over 200 products
+                        </div>
+                    </div>
+                    <div class="business-item">
+                        <i class="fas fa-bicycle"></i>
+                        <div>
+                            <strong>Bike Manila</strong> - Bicycle shop specializing in
+                            urban cycling solutions
+                        </div>
+                    </div>
+                    <div class="business-item">
+                        <i class="fas fa-glasses"></i>
+                        <div>
+                            <strong>Eyewear Glass</strong> - Optical shop offering
+                            prescription and fashion eyewear
+                        </div>
+                    </div>
+                </div>
+
+                <h4>Technologies Used:</h4>
+                <div class="project-tech">
+                    <span><i class="fab fa-react"></i> React.js</span>
+                    <span><i class="fab fa-css3-alt"></i> CSS3</span>
+                    <span><i class="fab fa-html5"></i> HTML5</span>
+                    <span><i class="fab fa-js"></i> JavaScript</span>
+                    <span><i class="fab fa-node-js"></i> JSX</span>
+                    <span><i class="fas fa-fire"></i> Firebase</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills-services">
+        <div class="container">
+            <div class="skills-header">
+                <h2>My Skills & Expertise</h2>
+                <p>
+                    A showcase of my diverse skill set across different domains
+                    including technical, gaming, and hardware/software expertise.
+                </p>
+            </div>
+
+            <!-- Technical Skills Card -->
+            <div class="skill-category-card animate-in">
+                <div class="skill-category-header">
+                    <h3 class="skill-category-title">Technical Skills</h3>
+                    <i class="fas fa-laptop-code skill-category-icon"></i>
+                </div>
+                <div class="skill-category-content">
+                    <div class="skill-category-image">
+                        <img src="images/codingyarn.jfif" alt="Technical Skills" />
+                    </div>
+                    <div class="skill-category-details">
+                        <p class="skill-description">
+                            As a person who interest in web developing, I've been building
+                            my skills in creating responsive and user-friendly websites.I
+                            mainly work on the frontend and enjoy turning designs into
+                            clean, functional code. I also focus on writing clear
+                            documentation to make projects easier to understand and
+                            maintain.
+                        </p>
+                        <h4>Key Technical Skills:</h4>
+                        <div class="skill-badges">
+                            <span class="skill-badge">HTML5 & CSS3</span>
+                            <span class="skill-badge">JavaScript (ES6+)</span>
+                            <span class="skill-badge">React.js</span>
+                            <span class="skill-badge">Vibe coding</span>
+                            <span class="skill-badge">Python</span>
+                            <span class="skill-badge">SQL Databases</span>
+                            <span class="skill-badge">Canva/Figma</span>
+                            <span class="skill-badge">Git Version Control</span>
+                            <span class="skill-badge">UI/UX Principles</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gaming Skills Card -->
+            <div
+                class="skill-category-card animate-in"
+                style="animation-delay: 0.2s"
+            >
+                <div class="skill-category-header">
+                    <h3 class="skill-category-title">Gaming Skills</h3>
+                    <i class="fas fa-gamepad skill-category-icon"></i>
+                </div>
+                <div class="skill-category-content">
+                    <div class="skill-category-image">
+                        <img src="images/gaming.jfif" alt="Gaming Skills" />
+                    </div>
+                    <div class="skill-category-details">
+                        <p class="skill-description">
+                            I'm an avid gamer with competitive experience in various genres.
+                            Playing titles like Wild Rift (MOBA), Blade & Soul Revolution
+                            (MMORPG), and Mutant Genetic Gladiators (strategy) has sharpened
+                            my skills in strategic thinking, fast decision-making, and team
+                            coordination — qualities that I bring into my development work
+                            as well.
+                        </p>
+                        <h4>Gaming Achievements:</h4>
+                        <div class="skill-badges">
+                            <span class="skill-badge">Climb Ranking</span>
+                            <span class="skill-badge">Gaming Skills</span>
+                            <span class="skill-badge">Game Analysis</span>
+                            <span class="skill-badge">Critical Thinking</span>
+                            <span class="skill-badge">Strategic Mindset</span>
+                            <span class="skill-badge">Team work</span>
+                            <span class="skill-badge">Sports</span>
+                            <span class="skill-badge">Climb Ranking</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hardware/Software Skills Card -->
+            <div
+                class="skill-category-card animate-in"
+                style="animation-delay: 0.4s"
+            >
+                <div class="skill-category-header">
+                    <h3 class="skill-category-title">Hardware & Software</h3>
+                    <i class="fas fa-tools skill-category-icon"></i>
+                </div>
+                <div class="skill-category-content">
+                    <div class="skill-category-image">
+                        <img src="images/nagaayos.jfif" alt="Hardware Skills" />
+                    </div>
+                    <div class="skill-category-details">
+                        <p class="skill-description">
+                            My expertise extends to computer hardware and software
+                            troubleshooting. I can assemble, upgrade, and maintain computer
+                            systems, as well as diagnose and resolve various technical
+                            issues.
+                        </p>
+                        <h4>Hardware/Software Skills:</h4>
+                        <div class="skill-badges">
+                            <span class="skill-badge">PC Building</span>
+                            <span class="skill-badge">Troubleshooting</span>
+                            <span class="skill-badge">System Upgrades</span>
+                            <span class="skill-badge">OS Installation</span>
+                            <span class="skill-badge">Driver Management</span>
+                            <span class="skill-badge">Network Setup</span>
+                            <span class="skill-badge">Data Recovery</span>
+                            <span class="skill-badge">Optimization</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other Skills Card -->
+            <div
+                class="skill-category-card animate-in"
+                style="animation-delay: 0.6s"
+            >
+                <div class="skill-category-header">
+                    <h3 class="skill-category-title">Other Skills</h3>
+                    <i class="fas fa-star skill-category-icon"></i>
+                </div>
+                <div class="skill-category-content">
+                    <div class="skill-category-image">
+                        <img src="images/weh dinga.jfif" alt="Other Skills" />
+                    </div>
+                    <div class="skill-category-details">
+                        <p class="skill-description">
+                            A collection of additional skills that complement my technical
+                            abilities, including creative skills, soft skills, and other
+                            competencies that contribute to my professional profile.
+                        </p>
+                        <h4>Additional Skills:</h4>
+                        <div class="skill-badges">
+                            <span class="skill-badge">Project Flow</span>
+                            <span class="skill-badge">Prototype Styling</span>
+                            <span class="skill-badge">Project Manager</span>
+                            <span class="skill-badge">Data Analyst</span>
+                            <span class="skill-badge">Financial Analysis</span>
+                            <span class="skill-badge">Technical Support</span>
+                            <span class="skill-badge">Problem Solving</span>
+                            <span class="skill-badge">Time Management</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Professional Services Section - UPDATED -->
+            <div class="services-section">
+                <h3>Professional Services</h3>
+                <div class="services-grid">
+                    <div class="service-item">
+                        <i class="fas fa-tools"></i>
+                        <h4>Computer System Servicing</h4>
+                        <p>
+                            Comprehensive hardware troubleshooting, system maintenance, and
+                            optimization for peak performance and reliability.
+                        </p>
+                    </div>
+                    <div class="service-item">
+                        <i class="fas fa-code"></i>
+                        <h4>Basic Web Development</h4>
+                        <p>
+                            Building functional websites using HTML, CSS, and JavaScript
+                            with responsive design principles for all devices.
+                        </p>
+                    </div>
+                    <div class="service-item">
+                        <i class="fas fa-chart-line"></i>
+                        <h4>Data Analyst</h4>
+                        <p>
+                            Collecting, processing, and interpreting complex datasets to
+                            extract meaningful insights and support decision-making.
+                        </p>
+                    </div>
+                    <div class="service-item">
+                        <i class="fas fa-gamepad"></i>
+                        <h4>Game Tester</h4>
+                        <p>
+                            Identifying bugs, assessing gameplay quality, and providing
+                            detailed feedback to improve user experience.
+                        </p>
+                    </div>
+                    <div class="service-item">
+                        <i class="fas fa-check-double"></i>
+                        <h4>Quality Assurance</h4>
+                        <p>
+                            Ensuring software quality through systematic testing procedures
+                            and continuous process improvement.
+                        </p>
+                    </div>
+                    <div class="service-item">
+                        <i class="fas fa-tasks"></i>
+                        <h4>Project Manager</h4>
+                        <p>
+                            Planning, executing, and finalizing projects according to
+                            deadlines while maintaining quality standards.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Professional Experience</h2>
+                <p>
+                    A summary of my professional journey and hands-on experience in the
+                    IT field
+                </p>
+            </div>
+
+            <!-- Summary Section -->
+            <div class="summary-card animate-in">
+                <div class="summary-header">
+                    <i class="fas fa-user-tie"></i>
+                    <h3>Professional Summary</h3>
+                </div>
+                <div class="summary-content">
+                    <p>
+                        Versatile IT professional with hands-on experience in technical
+                        support and data analysis, combining strong problem-solving skills
+                        with a deep understanding of hardware, software, and data systems.
+                        Proven expertise in maintaining computer hardware, performing
+                        system recovery operations, and diagnosing software and network
+                        issues, with a focus on reducing resolution times and improving
+                        productivity.
+                    </p>
+                    <p>
+                        Adept at transforming complex data into actionable insights using
+                        advanced analytics tools to drive informed decision-making and
+                        optimize business processes. Skilled in Windows operating systems,
+                        application installation, data backup and recovery, and technical
+                        documentation. A strong communicator and collaborator with a
+                        demonstrated ability to deliver innovative, data-driven solutions
+                        that align with organizational goals.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Experience Timeline -->
+            <div class="timeline">
+                <div class="timeline-item animate-in" style="animation-delay: 0.2s">
+                    <div class="timeline-date">Feb 2025 - May 2025</div>
+                    <div class="timeline-content">
+                        <h3>IT Technical Support Specialist (Intern)</h3>
+                        <h4>
+                            Mariana Academy of Maritime Studies Inc. - Manila, Philippines
+                        </h4>
+                        <ul class="responsibilities">
+                            <li>
+                                <i class="fas fa-check-circle"></i> Ensured uninterrupted daily training operations by managing the network and troubleshooting 24+ computer stations, achieving 100% system uptime.
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i> Facilitated training for 500+ students by successfully installing and configuring a specialized maritime software application across all 24 computer workstations, eliminating installation-related support tickets
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i> Supported instructor-led training by operating and providing real-time technical support for Full Mission Bridge and Engine maritime simulators, contributing to a seamless learning experience for students.
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i> Handled CCTV operations, including fulfilling requests for missing device footage and monitoring for hostile movement to ensure campus safety and security.
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i> Documented key events through photography, including batch-by-batch maritime student photos and graduation pictorials for ETR and ETO programs. Specifically captured ID pictures for 7-8 upcoming student batches.
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i> Increased departmental efficiency by handling high-volume printing tasks and providing prompt IT assistance to Accounting, HR, and Quality Assurance teams, reducing support wait times by an estimated 20%.
+                            <li>
+                                <i class="fas fa-check-circle"></i> Maintained data integrity and departmental compliance by performing quality checks on all assessment results and documenting anecdotal reports for IT record-keeping.
+                            </li>
+                            <li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experience Timeline -->
+            <div class="timeline">
+                <div class="timeline-item animate-in" style="animation-delay: 0.2s">
+                    <div class="timeline-date">Jul 2019 - Jul 2019</div>
+                    <div class="timeline-content">
+                        <h3>IT Support (Immersion)</h3>
+                        <h4>
+                            Mariana Academy of Maritime Studies Inc. - Manila, Philippines
+                        </h4>
+                        <ul class="responsibilities">
+                            <li>
+                                <i class="fas fa-check-circle"></i> Installed and configured operating systems and software for new employees
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i> Troubleshot network connectivity issues for remote and in-office staff
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i> Tested and deployed security updates to protect systems from vulnerabilities
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>Created user guides and training materials for common technical issues
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>Replaced faulty components like RAM, hard drives, and power supplies
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- References Section -->
+        <div class="references-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>My References</h2>
+                    <p>
+                        Individuals who can attest to my work ethic, skills, and professional performance.
+                    </p>
+                </div>
+
+                <div class="references-grid">
+                    <!-- Reference Card 1 -->
+                    <div class="reference-card animate-in" style="animation-delay: 0.2s">
+                        <div class="reference-header">
+                            <i class="fas fa-user-tie"></i>
+                            <h3>Mohammad Jamael</h3>
+                        </div>
+                        <div class="reference-details">
+                            <div class="reference-detail">
+                                <i class="fas fa-briefcase"></i>
+                                <span>IT Manager at Mariana Academy</span>
+                            </div>
+                            <div class="reference-detail">
+                                <i class="fas fa-envelope"></i>
+                                <span>itdepartment@marianaacademy.com</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reference Card 2 -->
+                    <div class="reference-card animate-in" style="animation-delay: 0.4s">
+                        <div class="reference-header">
+                            <i class="fas fa-user-tie"></i>
+                            <h3>Cyrus Feliciano</h3>
+                        </div>
+                        <div class="reference-details">
+                            <div class="reference-detail">
+                                <i class="fas fa-briefcase"></i>
+                                <span>Customer Experience Support</span>
+                            </div>
+                            <div class="reference-detail">
+                                <i class="fas fa-phone"></i>
+                                <span>09669742857</span>
+                            </div>
+                            <div class="reference-detail">
+                                <i class="fas fa-envelope"></i>
+                                <span>cyrusfeliciano.eim@gmail.com</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reference Card 3 -->
+                    <div class="reference-card animate-in" style="animation-delay: 0.6s">
+                        <div class="reference-header">
+                            <i class="fas fa-user-tie"></i>
+                            <h3>Christian Montero</h3>
+                        </div>
+                        <div class="reference-details">
+                            <div class="reference-detail">
+                                <i class="fas fa-briefcase"></i>
+                                <span>Thesis Co - Member</span>
+                            </div>
+                            <div class="reference-detail">
+                                <i class="fas fa-phone"></i>
+                                <span>09672004022</span>
+                            </div>
+                            <div class="reference-detail">
+                                <i class="fas fa-envelope"></i>
+                                <span>christian123montero@gmail.com</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="certificates-section">
+        <div class="container">
+            <h1>My Certificates</h1>
+            <p class="section-description">Here are the certificates I've earned through my academic journey and professional development.</p>
+            
+            <div class="certificates-list">
+                <!-- Certificate 1 -->
+                <div class="certificate-item">
+                    <div class="certificate-details">
+                        <h3>Certificate of Completion in Python AI Development</h3>
+                        <p class="issuing-org">Issuing Authority: Mimo</p>
+                        <p class="date-earned">Issue Date: June 16, 2025</p>
+                        <div class="certificate-description">
+                            <p>Advanced certification focusing on applying Python to AI development, including working with APIs and Large Language Models (LLMs). Combines OOP principles with AI-specific libraries/tools.</p>
+                        </div>
+                        <div class="skills-gained">
+                            <h4>Skills Gained:</h4>
+                            <div class="skills-badges">
+                                <span>Programming</span>
+                                <span>AI scripting</span>
+                            </div>
+                        </div>
+                        <button class="view-certificate-btn" onclick="openModal('images/certaipython.jfif')">
+                            <i class="fas fa-expand"></i> View Full Certificate
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Certificate 2 -->
+                <div class="certificate-item">
+                    <div class="certificate-details">
+                        <h3>Certificate of Completion in SQL</h3>
+                        <p class="issuing-org">Issued by: Mimo</p>
+                        <p class="date-earned">Issued on: June 11, 2025</p>
+                        <div class="certificate-description">
+                            <p>A project-based certification demonstrating ability to design relational databases, write complex queries, and extract business insights from data. Covers both theory and practical SQL implementation.</p>
+                        </div>
+                        <div class="skills-gained">
+                            <h4>Skills Gained:</h4>
+                            <div class="skills-badges">
+                                <span>Database design</span>
+                                <span>SQL queries</span>
+                            </div>
+                        </div>
+                        <button class="view-certificate-btn" onclick="openModal('images/certSQL.jfif')">
+                            <i class="fas fa-expand"></i> View Full Certificate
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Certificate 3 -->
+                <div class="certificate-item">
+                    <div class="certificate-details">
+                        <h3>Certificate of Completion in Python Programming</h3>
+                        <p class="issuing-org">Issued by: Mimo</p>
+                        <p class="date-earned">Issued on: June 5, 2025</p>
+                        <div class="certificate-description">
+                            <p>Learned the principles of user-centered design, wireframing, prototyping, and usability testing.</p>
+                        </div>
+                        <div class="skills-gained">
+                            <h4>Skills Gained:</h4>
+                            <div class="skills-badges">
+                                <span>Core Python</span>
+                                <span>Data structures</span>
+                            </div>
+                        </div>
+                        <button class="view-certificate-btn" onclick="openModal('images/certpyton.jfif')">
+                            <i class="fas fa-expand"></i> View Full Certificate
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Certificate 4 -->
+                <div class="certificate-item">
+                    <div class="certificate-details">
+                        <h3>Certificate of Completion 486 hrs - OJT</h3>
+                        <p class="issuing-org">Issued by: Mariana Academy of Maritime Studies Inc.</p>
+                        <p class="date-earned">Issued on: May 28, 2025</p>
+                        <div class="certificate-description">
+                            <p>Awarded to John Albert J. Retiza for successfully 
+                                completing the On-the-Job Training (OJT) Program at Mariana Academy of Maritime Studies, Inc.</p>
+                        </div>
+                        <div class="skills-gained">
+                            <h4>Skills Gained:</h4>
+                            <div class="skills-badges">
+                                <span>Troubleshooting</span>
+                                <span>Computer System</span>
+                            </div>
+                        </div>
+                        <button class="view-certificate-btn" onclick="openModal('images/MarianaCertSIT.jpg')">
+                            <i class="fas fa-expand"></i> View Full Certificate
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Certificate 5 -->
+                <div class="certificate-item">
+                    <div class="certificate-details">
+                        <h3>NC II in Computer Systems Servicing</h3>
+                        <i>Government-Accredited</i>
+                        <p class="issuing-org">Issued by: TESDA (Philippines)</p>
+                        <p class="date-earned">Issued on: December 6, 2019 | Valid until: December 5, 2024</p>
+                        <div class="certificate-description">
+                            <p>This government-accredited certification validates professional competency in maintaining computer systems and networks. It covers hands-on skills in installing/configuring hardware/software, setting up servers and networks, troubleshooting system errors, and applying workplace safety standards.</p>
+                        </div>
+                        <div class="skills-gained">
+                            <h4>Skills Gained:</h4>
+                            <div class="skills-badges">
+                                <span>Computer repair</span>
+                                <span>Electronics</span>
+                            </div>
+                        </div>
+                        <button class="view-certificate-btn" onclick="openModal('images/certnc2.jpg')">
+                            <i class="fas fa-expand"></i> View Full Certificate
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Certificate 6 -->
+                <div class="certificate-item">
+                    <div class="certificate-details">
+                        <h3>Certificate of Recognition</h3>
+                        <p class="issuing-org">Issued by: Florentino Torres Senior High School</p>
+                        <p class="date-earned">Issued on: November 5, 2019</p>
+                        <div class="certificate-description">
+                            <p>Awarded to John Albert J. Reitza for ranking among the Top 10 Students 
+                                of 12-CSS-A with an outstanding General Average of 89.31 during the First Semester, 
+                                School Year 2019–2020.</p>
+                        </div>
+                        <div class="skills-gained">
+                            <h4>About:</h4>
+                            <div class="skills-badges">
+                                <span>Top 10</span>
+                                <span>Average 89.31</span>
+                            </div>
+                        </div>
+                        <button class="view-certificate-btn" onclick="openModal('images/certnov52019.jpg')">
+                            <i class="fas fa-expand"></i> View Full Certificate
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Certificate 7 -->
+                <div class="certificate-item">
+                    <div class="certificate-details">
+                        <h3>Certificate of Recognition</h3>
+                        <p class="issuing-org">Issued by: Florentino Torres Senior High School</p>
+                        <p class="date-earned">Issued on: February 01, 2020</p>
+                        <div class="certificate-description">
+                            <p>Awarded to John Albert J. Reitza for achieving Top 10 Honors 
+                                in 12-CSS-A with an exceptional General Average of 90.00 during the Third Quarter, 
+                                School Year 2019–2020.</p>
+                        </div>
+                        <div class="skills-gained">
+                            <h4>About:</h4>
+                            <div class="skills-badges">
+                                <span>Top 10</span>
+                                <span>Average 90.00</span>
+                            </div>
+                        </div>
+                        <button class="view-certificate-btn" onclick="openModal('images/certfeb2020.jpg')">
+                            <i class="fas fa-expand"></i> View Full Certificate
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Certificate 8 -->
+                <div class="certificate-item">
+                    <div class="certificate-details">
+                        <h3>Certificate of Completion 80 hrs - Immersion</h3>
+                        <p class="issuing-org">Issued by: Mariana Academy of Maritime Studies Inc.</p>
+                        <p class="date-earned">Issued on: July 25, 2019</p>
+                        <div class="certificate-description">
+                            <p>Awarded to John Albert Retiza for successfully completing the 
+                                80-hour Immersion Program in the IT Department (IT Assistant) 
+                                at Mariana Academy of Maritime Studies, Inc.</p>
+                        </div>
+                        <div class="skills-gained">
+                            <h4>Skills Gained:</h4>
+                            <div class="skills-badges">
+                                <span>Data Encoder</span>
+                                <span>Team Work</span>
+                            </div>
+                        </div>
+                        <button class="view-certificate-btn" onclick="openModal('images/Immersion.jpg')">
+                            <i class="fas fa-expand"></i> View Full Certificate
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Certificate 9 -->
+                <div class="certificate-item">
+                    <div class="certificate-details">
+                        <h3>Certificate of Recognition</h3>
+                        <p class="issuing-org">Issued by: Florentino Torres Senior High School</p>
+                        <p class="date-earned">Issued on: November 16, 2018</p>
+                        <div class="certificate-description">
+                            <p>Awarded to John Albert J. Retiza for ranking Top 13 in Grade 
+                                11-CONFUCIUS with a commendable General Average of 86.63 during the First Semester, 
+                                School Year 2018–2019.</p>
+                        </div>
+                        <div class="skills-gained">
+                            <h4>About:</h4>
+                            <div class="skills-badges">
+                                <span>Top 13</span>
+                                <span>Average 86.63</span>
+                            </div>
+                        </div>
+                        <button class="view-certificate-btn" onclick="openModal('images/certnov162018.jpg')">
+                            <i class="fas fa-expand"></i> View Full Certificate
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Seminars Section -->
+            <h1 style="margin-top: 3rem;">My Seminar Attended</h1>
+            
+            <div class="certificates-list">
+                <!-- Seminar 1 -->
+                <div class="certificate-item">
+                    <div class="certificate-details">
+                        <h3>Certificate of Tech Summit Participation</h3>
+                        <p class="issuing-org">Issued by: Technological University of The Philippines</p>
+                        <p class="date-earned">Issued on: February 28, 2025</p>
+                        <div class="certificate-description">
+                            <p>Awarded to John Albert Retiza for active participation 
+                                in G-Tech Summit 2025, a premier tech innovation event.</p>
+                        </div>
+                        <div class="skills-gained">
+                            <h4>Skills Gained:</h4>
+                            <div class="skills-badges">
+                                <span>Innovative Development</span>
+                            </div>
+                        </div>
+                        <button class="view-certificate-btn" onclick="openModal('images/seminar new_page-0001.jpg')">
+                            <i class="fas fa-expand"></i> View Full Certificate
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Seminar 2 -->
+                <div class="certificate-item">
+                    <div class="certificate-details">
+                        <h3>Certificate of Seminar Participation</h3>
+                        <p class="issuing-org">Issued by: Florentino Torres Senior High School</p>
+                        <p class="date-earned">Issued on: March 16, 2019</p>
+                        <div class="certificate-description">
+                            <p>Awarded to John Albert Reliza for successfully completing a 2.5-hour seminar program on:Responsible IT Education (Media Literacy, Fake News, Cyberbullying, 
+                                Social Media) Communications & Visual Graphic Design NC-III IDEAL Leadership in Entrepreneurial 
+                                Technologies</p>
+                        </div>
+                        <div class="skills-gained">
+                            <h4>Knowledge Gained:</h4>
+                            <div class="skills-badges">
+                                <span>Ideal Leadership</span>
+                            </div>
+                        </div>
+                        <button class="view-certificate-btn" onclick="openModal('images/seminar old.jpg')">
+                            <i class="fas fa-expand"></i> View Full Certificate
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-row">
+                <div class="contact-horizontal">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>retiza.icta@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+63 936 464 3250</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Caloocan City, Philippines</span>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2025 <strong>John Albert Retiza</strong>. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
     </footer>
 
-    <script src="analytics.js"></script>
-     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Hamburger menu toggle
+    <!-- Certificate Modal -->
+    <div id="certificateModal" class="modal-overlay">
+        <div class="modal-content">
+            <img id="modalCertificateImage" src="" alt="Certificate">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+        </div>
+    </div>
+
+    <script>
+        // ======================
+        // 1. Smooth Scrolling
+        // ======================
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+            anchor.addEventListener("click", function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute("href");
+                if (targetId === "#") return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: "smooth",
+                    });
+                }
+            });
+        });
+
+        // ======================
+        // 2. Active Navigation
+        // ======================
+        const sections = document.querySelectorAll("section");
+        const navItems = document.querySelectorAll("nav ul li a");
+
+        window.addEventListener("scroll", function () {
+            let current = "";
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            navItems.forEach((item) => {
+                item.classList.remove("active");
+                if (item.getAttribute("href").includes(current)) {
+                    item.classList.add("active");
+                }
+            });
+        });
+
+        // ======================
+        // 3. Mobile Menu
+        // ======================
         const menuToggle = document.querySelector('.menu-toggle');
         const nav = document.querySelector('nav');
         
         menuToggle.addEventListener('click', function() {
-          nav.classList.toggle('active');
-          menuToggle.classList.toggle('active');
+            nav.classList.toggle('active');
+            menuToggle.classList.toggle('active');
         });
 
         // Close menu when clicking on a link
         const navLinks = document.querySelectorAll('nav ul li a');
         navLinks.forEach(link => {
-          link.addEventListener('click', function() {
-            nav.classList.remove('active');
-            menuToggle.classList.remove('active');
-          });
+            link.addEventListener('click', function() {
+                nav.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
         });
-      });
+
+        // ======================
+        // 4. Scroll Animations
+        // ======================
+        const animateOnScroll = function () {
+            const elements = document.querySelectorAll(
+                ".education-item, .project-item, .service-item, .timeline-item, .skill-category-card, .summary-card, .reference-card, .certificate-item"
+            );
+
+            elements.forEach((element) => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (elementPosition < windowHeight - 100) {
+                    element.style.opacity = "1";
+                    element.style.transform = "translateY(0)";
+                }
+            });
+        };
+
+        // Set initial state for animation
+        const elementsToAnimate = document.querySelectorAll(
+            ".education-item, .project-item, .service-item, .timeline-item, .skill-category-card, .summary-card, .reference-card, .certificate-item"
+        );
+        elementsToAnimate.forEach((element) => {
+            element.style.opacity = "0";
+            element.style.transform = "translateY(30px)";
+            element.style.transition = "all 0.6s ease";
+        });
+
+        window.addEventListener("scroll", animateOnScroll);
+        animateOnScroll(); // Run once on page load
+
+        // ======================
+        // 5. Project Sliders
+        // ======================
+        const sliders = document.querySelectorAll(".project-slider");
+
+        sliders.forEach((slider) => {
+            const slides = slider.querySelector(".slides");
+            const slideItems = slider.querySelectorAll(".slide");
+            const prevBtn = slider.querySelector(".prev");
+            const nextBtn = slider.querySelector(".next");
+
+            let currentIndex = 0;
+            const totalSlides = slideItems.length;
+
+            // Set initial position
+            updateSlider();
+
+            // Next button click
+            nextBtn.addEventListener("click", () => {
+                currentIndex = (currentIndex + 1) % totalSlides;
+                updateSlider();
+            });
+
+            // Previous button click
+            prevBtn.addEventListener("click", () => {
+                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                updateSlider();
+            });
+
+            function updateSlider() {
+                slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+
+            // Optional: Touch support for mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            slides.addEventListener(
+                "touchstart",
+                (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                },
+                { passive: true }
+            );
+
+            slides.addEventListener(
+                "touchend",
+                (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    handleSwipe();
+                },
+                { passive: true }
+            );
+
+            function handleSwipe() {
+                if (touchEndX < touchStartX - 50) {
+                    // Swipe left - next
+                    currentIndex = (currentIndex + 1) % totalSlides;
+                } else if (touchEndX > touchStartX + 50) {
+                    // Swipe right - previous
+                    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                }
+                updateSlider();
+            }
+        });
+
+        // ======================
+        // 6. Certificate Modal
+        // ======================
+        function openModal(imageSrc) {
+            const modal = document.getElementById('certificateModal');
+            const modalImg = document.getElementById('modalCertificateImage');
+            modalImg.src = imageSrc;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('certificateModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside the image
+        document.getElementById('certificateModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // ======================
+        // 7. Rating Slip Button Handling
+        // ======================
+        document.querySelectorAll('.rating-slip-button.view').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const pdfUrl = this.getAttribute('href');
+                console.log('Rating slip viewed:', pdfUrl);
+                window.open(pdfUrl, '_blank');
+            });
+        });
+
+        document.querySelectorAll('.rating-slip-button.download').forEach(button => {
+            button.addEventListener('click', function(e) {
+                console.log('Rating slip download initiated');
+                // Let default download behavior proceed
+            });
+        });
+
+        console.log("All JavaScript features initialized");
     </script>
-  </body>
+</body>
 </html>
