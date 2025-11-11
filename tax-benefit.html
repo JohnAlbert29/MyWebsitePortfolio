@@ -4,85 +4,195 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tax & Benefit Information | JAl R. Portfolio</title>
-    <link rel="stylesheet" href="personal-info.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Additional styles for the tax-benefit page */
-        .tax-benefit-section {
-            padding: 4rem 0;
+        /* CSS Variables for premium theme */
+        :root {
+            --primary-color: #1a237e;
+            --secondary-color: #d4af37;
+            --accent-color: #5c6bc0;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --white: #ffffff;
+            --gray-light: #e9ecef;
+            --gray-medium: #6c757d;
+            --success-color: #28a745;
+            --info-color: #17a2b8;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --box-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+        
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
             background-color: var(--light-color);
-            min-height: 80vh;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Header styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2a3a9e 100%);
+            color: var(--white);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        header .container {
             display: flex;
+            justify-content: space-between;
             align-items: center;
         }
         
+        header h1 a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary-color);
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        
+        /* Main content styles */
+        .tax-benefit-section {
+            padding: 3rem 0;
+            background-color: var(--light-color);
+            min-height: 80vh;
+        }
+        
         .tax-benefit-container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
             background: var(--white);
-            padding: 3rem;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border-radius: 16px;
+            box-shadow: var(--box-shadow-lg);
+            overflow: hidden;
         }
         
         .tax-benefit-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        
-        .tax-benefit-header h2 {
-            color: var(--primary-color);
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .tax-benefit-header h2:after {
-            content: "";
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: var(--secondary-color);
-        }
-        
-        .tax-benefit-header p {
-            color: var(--accent-color);
-            font-size: 1.1rem;
-            margin-top: 1.5rem;
-        }
-        
-        /* National ID Section */
-        .national-id-section {
             background: linear-gradient(135deg, var(--primary-color) 0%, #2a3a9e 100%);
-            border-radius: 12px;
-            padding: 2.5rem;
-            margin-bottom: 2.5rem;
             color: var(--white);
+            padding: 2.5rem;
             text-align: center;
-            box-shadow: 0 8px 25px rgba(26, 35, 126, 0.3);
             position: relative;
             overflow: hidden;
         }
         
-        .national-id-section:before {
-            content: "";
+        .tax-benefit-header:before {
+            content: '';
             position: absolute;
             top: -50%;
             right: -50%;
             width: 100%;
             height: 200%;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            transform: rotate(30deg);
+        }
+        
+        .tax-benefit-header h2 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .tax-benefit-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .tax-benefit-content {
+            padding: 2.5rem;
+        }
+        
+        /* National ID Section */
+        .national-id-section {
+            background: linear-gradient(135deg, #1a237e 0%, #303f9f 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            color: var(--white);
+            box-shadow: var(--box-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .national-id-section:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.05);
             transform: rotate(30deg);
         }
         
         .national-id-header {
             display: flex;
             align-items: center;
-            justify-content: center;
             margin-bottom: 1.5rem;
             position: relative;
             z-index: 1;
@@ -107,13 +217,13 @@
         
         .national-id-header h3 {
             color: var(--white);
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             margin: 0;
             font-weight: 600;
         }
         
         .national-id-number {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             font-weight: 700;
             letter-spacing: 2px;
             padding: 1.5rem;
@@ -124,32 +234,35 @@
             z-index: 1;
             font-family: 'Courier New', monospace;
             backdrop-filter: blur(5px);
+            text-align: center;
         }
         
+        /* Cards Grid */
         .numbers-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
         
         .number-card {
-            background: linear-gradient(135deg, var(--light-color) 0%, #f9f9f9 100%);
+            background: var(--white);
             border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            box-shadow: var(--box-shadow);
             transition: all 0.3s ease;
-            border-left: 4px solid var(--primary-color);
+            border-top: 4px solid var(--primary-color);
             position: relative;
             overflow: hidden;
         }
         
         .number-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--box-shadow-lg);
         }
         
         .number-card:before {
-            content: "";
+            content: '';
             position: absolute;
             top: 0;
             right: 0;
@@ -185,18 +298,18 @@
         
         .card-header h3 {
             color: var(--primary-color);
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             margin: 0;
             font-weight: 600;
         }
         
         .number-display {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--dark-color);
             letter-spacing: 1px;
             padding: 1rem;
-            background: var(--white);
+            background: var(--gray-light);
             border-radius: 8px;
             text-align: center;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
@@ -211,11 +324,30 @@
             transform: scale(1.02);
         }
         
+        /* Security Badge */
+        .security-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: var(--gray-light);
+            border-radius: 8px;
+            color: var(--gray-medium);
+            font-size: 0.9rem;
+        }
+        
+        .security-badge i {
+            color: var(--success-color);
+        }
+        
+        /* Print Section */
         .print-section {
             text-align: center;
-            margin-top: 3rem;
+            margin-top: 2rem;
             padding-top: 2rem;
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            border-top: 1px solid var(--gray-light);
         }
         
         .print-btn {
@@ -231,19 +363,28 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--box-shadow);
         }
         
         .print-btn:hover {
             background: var(--secondary-color);
             color: var(--dark-color);
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--box-shadow-lg);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
         }
         
         /* Print-specific styles */
         @media print {
-            header, footer, .mobile-nav-buttons, .print-btn {
+            header, footer, .print-btn {
                 display: none !important;
             }
             
@@ -258,6 +399,11 @@
                 padding: 0;
                 margin: 0;
                 max-width: 100%;
+            }
+            
+            .tax-benefit-header {
+                background: #f0f0f0 !important;
+                color: black !important;
             }
             
             .national-id-section {
@@ -297,8 +443,58 @@
         
         /* Responsive adjustments */
         @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary-color);
+                padding: 1rem;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                transform: translateY(-10px);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+            }
+            
+            nav.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 0;
+                margin-bottom: 0.5rem;
+            }
+            
+            nav ul li a {
+                display: block;
+                padding: 0.5rem 0;
+            }
+            
             .tax-benefit-container {
+                margin: 0 1rem;
+            }
+            
+            .tax-benefit-header {
                 padding: 2rem 1.5rem;
+            }
+            
+            .tax-benefit-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .tax-benefit-content {
+                padding: 1.5rem;
             }
             
             .numbers-grid {
@@ -306,11 +502,11 @@
             }
             
             .number-display {
-                font-size: 1.5rem;
+                font-size: 1.3rem;
             }
             
             .national-id-number {
-                font-size: 1.8rem;
+                font-size: 1.5rem;
                 padding: 1rem;
             }
             
@@ -323,6 +519,52 @@
                 margin-right: 0;
                 margin-bottom: 1rem;
             }
+        }
+        
+        @media (min-width: 769px) {
+            nav {
+                display: block !important;
+            }
+        }
+        
+        /* Animation for page load */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .tax-benefit-container > * {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .national-id-section {
+            animation-delay: 0.1s;
+        }
+        
+        .number-card:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+        
+        .number-card:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+        
+        .number-card:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        .number-card:nth-child(4) {
+            animation-delay: 0.5s;
+        }
+        
+        .print-section {
+            animation-delay: 0.6s;
         }
     </style>
 </head>
@@ -354,84 +596,83 @@
                     <p>Official identification numbers for employment and benefits</p>
                 </div>
                 
-                <!-- National ID Section -->
-                <div class="national-id-section">
-                    <div class="national-id-header">
-                        <div class="national-id-icon">
-                            <i class="fas fa-id-card-alt"></i>
-                        </div>
-                        <h3>Philippine National ID</h3>
+                <div class="tax-benefit-content">
+                    <!-- Security Badge -->
+                    <div class="security-badge">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Your information is secure and protected</span>
                     </div>
-                    <div class="national-id-number">
-                        2380-9183-9029-7485
-                    </div>
-                </div>
-                
-                <div class="numbers-grid">
-                    <div class="number-card">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="fas fa-id-card"></i>
+                    
+                    <!-- National ID Section -->
+                    <div class="national-id-section">
+                        <div class="national-id-header">
+                            <div class="national-id-icon">
+                                <i class="fas fa-id-card-alt"></i>
                             </div>
-                            <h3>SSS Number</h3>
+                            <h3>Philippine National ID</h3>
                         </div>
-                        <div class="number-display">
-                            35-388771-0
+                        <div class="national-id-number">
+                            2380-9183-9029-7485
                         </div>
                     </div>
                     
-                    <div class="number-card">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="fas fa-heartbeat"></i>
+                    <div class="numbers-grid">
+                        <div class="number-card">
+                            <div class="card-header">
+                                <div class="card-icon">
+                                    <i class="fas fa-id-card"></i>
+                                </div>
+                                <h3>SSS Number</h3>
                             </div>
-                            <h3>PhilHealth Number</h3>
+                            <div class="number-display">
+                                35-388771-0
+                            </div>
                         </div>
-                        <div class="number-display">
-                            02-027802303-7
+                        
+                        <div class="number-card">
+                            <div class="card-header">
+                                <div class="card-icon">
+                                    <i class="fas fa-heartbeat"></i>
+                                </div>
+                                <h3>PhilHealth Number</h3>
+                            </div>
+                            <div class="number-display">
+                                02-027802303-7
+                            </div>
+                        </div>
+                        
+                        <div class="number-card">
+                            <div class="card-header">
+                                <div class="card-icon">
+                                    <i class="fas fa-home"></i>
+                                </div>
+                                <h3>Pag-IBIG Number</h3>
+                            </div>
+                            <div class="number-display">
+                                1213-6638-7370
+                            </div>
+                        </div>
+                        
+                        <div class="number-card">
+                            <div class="card-header">
+                                <div class="card-icon">
+                                    <i class="fas fa-file-invoice-dollar"></i>
+                                </div>
+                                <h3>Tax Identification No.</h3>
+                            </div>
+                            <div class="number-display">
+                                681-800-237-000
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="number-card">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="fas fa-home"></i>
-                            </div>
-                            <h3>Pag-IBIG Number</h3>
-                        </div>
-                        <div class="number-display">
-                            1213-6638-7370
-                        </div>
+                    <div class="print-section">
+                        <button class="print-btn" onclick="window.print()">
+                            <i class="fas fa-print"></i> Print / Save as PDF
+                        </button>
                     </div>
-                    
-                    <div class="number-card">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="fas fa-file-invoice-dollar"></i>
-                            </div>
-                            <h3>Tax Identification No.</h3>
-                        </div>
-                        <div class="number-display">
-                            681-800-237-000
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="print-section">
-                    <button class="print-btn" onclick="window.print()">
-                        <i class="fas fa-print"></i> Print / Save as PDF
-                    </button>
                 </div>
             </div>
-        </div>
-        
-        <div class="mobile-nav-buttons">
-            <a href="personal-info.html" class="mobile-nav-btn">
-                <i class="fas fa-arrow-left"></i> Previous
-            </a>
-            <a href="academic.html" class="mobile-nav-btn">
-                Next <i class="fas fa-arrow-right"></i>
-            </a>
         </div>
     </section>
 
@@ -459,6 +700,45 @@
                     nav.classList.remove('active');
                     menuToggle.classList.remove('active');
                 });
+            });
+            
+            // Add copy functionality to number displays
+            const numberDisplays = document.querySelectorAll('.number-display, .national-id-number');
+            numberDisplays.forEach(display => {
+                display.addEventListener('click', function() {
+                    const textToCopy = this.textContent.trim();
+                    navigator.clipboard.writeText(textToCopy).then(() => {
+                        // Create a temporary notification
+                        const notification = document.createElement('div');
+                        notification.textContent = 'Copied to clipboard!';
+                        notification.style.cssText = `
+                            position: fixed;
+                            bottom: 20px;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            background: var(--success-color);
+                            color: white;
+                            padding: 10px 20px;
+                            border-radius: 5px;
+                            z-index: 1000;
+                            font-weight: bold;
+                            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+                        `;
+                        document.body.appendChild(notification);
+                        
+                        setTimeout(() => {
+                            document.body.removeChild(notification);
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Failed to copy: ', err);
+                    });
+                });
+                
+                // Add cursor pointer to indicate clickability
+                display.style.cursor = 'pointer';
+                
+                // Add tooltip
+                display.title = 'Click to copy';
             });
         });
     </script>
